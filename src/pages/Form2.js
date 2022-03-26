@@ -26,15 +26,19 @@ function Form2() {
     };
 
     const handlePostnom = (e) => {
-        if(e.target.value === ''){
+        if (e.target.value === '') {
             setIsValidPostnom(false);
-        }else{
+        } else {
             setIsValidPostnom(true);
         }
     }
 
-    const handleCours = () => {
-
+    const handleCours = (e) => {
+        if (e.target.value === '--Cours--') {
+            setIsValidCours(false);
+        } else {
+            setIsValidCours(true);
+        }
     }
 
     useEffect(() => {
@@ -49,7 +53,7 @@ function Form2() {
         e.preventDefault();
         setClick(true);
 
-        if (isValidNom === false || isValidPostnom === false) {
+        if (isValidNom === false || isValidPostnom === false || isValidCours === false) {
             return false;
         } else {
             setCurrentStep(3);
@@ -89,6 +93,8 @@ function Form2() {
                                         click === true &&
                                         <>
                                             {
+                                                isValidPostnom === false ?
+                                                    'Veuillez renseigner le postnom du professeur svp !' : ''
                                             }
                                         </>
                                     }
@@ -121,6 +127,14 @@ function Form2() {
                                     </>
                                 }
                             </select>
+
+                            {
+                                click === true && (
+                                    <>
+                                        {isValidCours === false ? <div className="sexeObligatoire mt-1">Veuillez choisir le nom du cours svp !</div> : ""}
+                                    </>
+                                )
+                            }
                         </div>
 
 

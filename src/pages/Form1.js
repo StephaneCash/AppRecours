@@ -37,7 +37,6 @@ function Form1() {
         } else {
             setisValidObjRecours(true);
 
-
             if (e.target.value === 'Erreur de transcription de cotes de l\'examen' ||
                 e.target.value === "Erreur de transcription de cotes de l'année"
             ) {

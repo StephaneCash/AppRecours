@@ -6,6 +6,7 @@ import { multiStepContext } from "../StepContext";
 import Form1 from './Form1';
 import Form2 from "./Form2";
 import { Card, Step, StepLabel, Stepper } from '@material-ui/core';
+import ReceivedDataForm from './ReceivedDataForm'
 
 
 function ListRecours() {
@@ -18,7 +19,7 @@ function ListRecours() {
     } else if (step === 2) {
       return <Form2 />
     } else if (step === 3) {
-      return 'Fini'
+      return <ReceivedDataForm />
     };
   };
 
