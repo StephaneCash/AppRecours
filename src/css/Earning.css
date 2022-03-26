@@ -1,0 +1,16 @@
+.EarningsCard {
+    height: 100%;
+    width: 100%;
+    background-color: #6100d4;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: #fff;
+    transition: 0ms.1s ease-in-out;
+    margin-left: 1rem;
+    cursor: pointer;
+    box-shadow : 2px 2px 18px silver !important;
+}
+
+.EarningsCard:hover {
+    box-shadow: 2px 1px 18px #555 !important
+}

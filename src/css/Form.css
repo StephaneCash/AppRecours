@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.top-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.link {
+    display: flex;
+    gap: 10px;
+    padding: 10px 10px;
+}
+
+.link:hover {
+    color: rgb(214, 211, 211);
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.text-item{
+    white-space: nowrap;
+}
+
+.logo {
+    font-size: 25px;
+    line-height: 0;
+    cursor: pointer !important;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.MuiStepIcon-root.MuiStepIcon-active {
+    color: #14234a !important;
+}
+
+.MuiStepIcon-root.MuiStepIcon-completed {
+    color: #14234a !important;
+}
+
+.btn-back {
+    background-color: #fff !important;
+    color: #333 !important;
+    border-radius: 5px;
+    padding: 5px;
+    border: none !important;
+    height: 38px;
+    box-shadow: 1px 1px 3px #cac1c1;
+}
+
+.btn-confirm {
+    background-color: #14234a !important;
+    color: #fff !important;
+    border-radius: 5px;
+    border: none !important;
+    padding: 5px;
+    box-shadow: 1px 1px 3px #cac1c1;
+}
+
+.btn-back:hover {
+    color: #333 !important;
+    border: 1px solid #14234a !important;
+}
+
+.btn-confirm:hover {
+    color: #14234a !important;
+    border: 1px solid #14234a !important;
+    background-color: #fff !important;
+}
+
+.btn {
+    position: absolute !important;
+    left: 35% !important;
+    top: 80% !important;
+}
+
+.sexeObligatoire {
+    color: rgba(0, 0, 0, 0.54);
+    margin-left: 12px;
+    font-size: 0.75rem;
+    margin-top: -20px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+}
+
+.sexeOdbligatoireJust {
+    margin-top: 4px;
+    font-size: 0.75rem;
+    text-align: justify;
+    padding: 0 12px;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.sexeOdbligatoire {
+    color: rgba(0, 0, 0, 0.54);
+    margin-left: 12px;
+    margin-top: 4px;
+    font-size: 0.75rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+}
+
+.sexeObligatoireImage {
+    color: rgba(0, 0, 0, 0.54);
+    margin-left: 12px;
+    margin-top: 4px;
+    font-size: 0.75rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+}
+
+.btnCamera {
+    height: 7.6vh !important;
+}
+
+@media(max-width:1205px) {
+    .sidebar {
+        width: 50px !important;
+    }
+    .name, #name{
+        display: none !important;
+    }
+    .logo{
+        display: none !important;
+    }
+}
+
+@media(max-width: 730px){
+    .form1.row, .form2 .row, .form3, .form41{
+        display: block !important;
+    }
+    .form1 .colonne6, .form2 .col-6, .form41 .col-6{
+        width: 100% !important;
+    }
+
+    .form1 .colonne62{
+        width: 100% !important;
+    }
+
+    .formB .MuiButton-root{
+        margin: 12px 5px 0 0 !important;
+    }
+}
+
+

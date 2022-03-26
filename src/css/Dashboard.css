@@ -1,0 +1,33 @@
+.text-dashboard{
+    margin-left: 1rem;
+}
+
+.MainContent{
+    background-color: #fff !important;
+    margin-left: 3rem;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 18px silver !important;
+    cursor: pointer;
+}
+
+.dash1{
+    margin-left: 1rem;
+}
+
+.dash2{
+    margin-left: 1rem;
+}
+
+.dash1, .dash2{
+    background-color: #fff !important;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 18px silver !important;
+    cursor: pointer;
+    height: 40vh;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.col-7{
+    width: 51.3% !important;
+}

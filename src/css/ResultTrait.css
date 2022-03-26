@@ -1,0 +1,71 @@
+.ResultTrait{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: #555;
+    transition: 0ms.1s ease-in-out;
+    margin-left: 2rem;
+    box-shadow : 2px 2px 18px silver !important;
+}
+
+.ResultTrait:hover{
+    box-shadow: 2px 1px 18px #555 !important;
+    cursor: pointer;
+}
+
+.ResultTrait .col1{
+    background-color: #efefef !important;
+    height: auto;
+    border-radius: 7px;
+    padding: 20px;
+}
+
+.ResultTrait .col1 .bloc-col{
+    background-color: #6100d4;
+    width: 20%;
+    text-align: center;
+    color: #fff;
+    border-radius: 7px;
+}
+
+.ResultTrait .col1 h5{
+    margin-left: 1rem;
+}
+
+.ResultTrait .col2{
+    background-color: #efefef !important;
+    height: 50%;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.ResultTrait .result{
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    padding: 5px;
+}
+
+.ResultTrait .col2 .trait{
+    width: 50%;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 7px;
+    color: #222;
+    margin-right: 7px;
+    padding: 10px;
+    background-color: #fff !important;
+}
+
+.ResultTrait .col2 .NonTrait{
+    width: 50%;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 7px;
+    padding: 10px;
+    color: #222;
+    background-color: #fff !important;
+}
+
