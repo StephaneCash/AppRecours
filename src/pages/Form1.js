@@ -83,8 +83,6 @@ function Form1() {
 
     }, [isValidNom, isValidPromotion, isValidPostnom, isValidObjRecours, ]);
 
-    console.log('DATA ::: ', userData)
-
     return (
         <>
             <h3 className="text-center mt-1">Identité de l'étudiant</h3>
