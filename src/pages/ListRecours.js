@@ -46,7 +46,7 @@ function ListRecours() {
                         </Step>
 
                         <Step>
-                          <StepLabel></StepLabel>
+                          <StepLabel>Terminé</StepLabel>
                         </Step>
                       </Stepper>
                     </div>

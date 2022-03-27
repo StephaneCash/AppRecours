@@ -34,11 +34,11 @@ function Login() {
                         <input type="password" className='form-control' placeholder='Password' />
                     </div>
                 </div>
-                <div className='card-footer'>
+                <div className='card-footer '>
                     <button 
                         onClick={connecter}
                         type='submit' 
-                        className='btn'>{btnState ? 'Se connecter' : 'Connexion...'}</button>
+                        className='btnConnexion'>{btnState ? 'Se connecter' : 'Connexion...'}</button>
                 </div>
             </div>
         </div>

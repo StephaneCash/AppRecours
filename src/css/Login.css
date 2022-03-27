@@ -31,7 +31,7 @@
     box-shadow: none !important;
 }
 
-.login .btn{
+.login .btnConnexion{
     background-color: #162349 !important;
     color: #fff !important;
     width: 100% !important;
@@ -52,7 +52,6 @@
 }
 
 .login .card-footer{
-    text-align: center;
     height: 180px !important;
     font-size: 20px !important;
     background-color: #fff !important;
