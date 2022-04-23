@@ -12,10 +12,10 @@
     height: auto !important;
     padding: 10px;
     width: 100%;
-    border:1px solid #444 !important;
+    border: 1px solid #444 !important;
 }
 
-.sideBar .image{
+.sideBar .image {
     flex-direction: column;
     display: flex;
     align-items: center !important;
@@ -25,7 +25,7 @@
     color: #e4e4e4 !important;
 }
 
-.sideBar .image img{
+.sideBar .image img {
     width: 7rem;
     height: 7rem;
     border-radius: 100%;
@@ -65,4 +65,33 @@
     width: 100% !important;
     margin-left: -1rem;
     padding-left: 1rem !important;
+}
+
+@media(max-width:1100px) {
+    .sideBar .active {
+        width: auto !important;
+        margin-left: 0rem;
+        padding-left: 0rem !important;
+        background-color: #14234a !important;
+    }
+
+    .textNavbar{
+        display: none;
+    }
+
+    ul {
+        margin-left: -10px !important;
+    }
+
+    .col-2{
+        width: 10% !important;
+    }
+
+    .col-10{
+        width: 90% !important;
+    }
+
+    .container{
+        max-width: 100% !important;
+    }
 }

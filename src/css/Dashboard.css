@@ -31,3 +31,19 @@
 .col-7{
     width: 51.3% !important;
 }
+
+@media(max-width: 1300px){
+    .navbarCol{
+        width: auto !important;
+    }
+}
+
+@media(max-width:1100px){
+    .textNavbar{
+        display: none;
+    }
+
+    .dashboardCol{
+        width: 94% !important;
+    }
+}

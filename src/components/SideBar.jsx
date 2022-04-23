@@ -9,7 +9,7 @@ function SideBar() {
     return (
         <div className="sideBar">
             <div className="image">
-                    <Avatar>R</Avatar>
+                <Avatar>R</Avatar>
                 <h4>Richard</h4>
             </div>
             <div className="linkContainer">
@@ -17,32 +17,39 @@ function SideBar() {
                     <li>
 
                         <NavLink to="/dashboard">
-                            <AiOutlineDashboard style={{ marginRight: '10px', fontSize: '20px' }} />
-                            Dashboard
+                            <AiOutlineDashboard className="icon"
+                                style={{ marginRight: '10px', fontSize: '20px' }} />
+
+                            <span className="textNavbar">Dashboard</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/listrecours">
-                            <Book style={{ marginRight: '10px', fontSize: '20px' }} />
-                            Recours
+                            <Book className="icon"
+                                style={{ marginRight: '10px', fontSize: '20px' }} />
+
+                            <span className="textNavbar">Recours</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/se_plaindre">
-                            <School style={{ marginRight: '10px', fontSize: '20px' }} />
-                            Se plaindre
+                            <School className="icon"
+                                style={{ marginRight: '10px', fontSize: '20px' }} />
+                            <span className="textNavbar">Se plaindre</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/Communication">
-                            <Work style={{ marginRight: '10px', fontSize: '20px' }} />
-                            Communication
+                            <Work className="icon"
+                                style={{ marginRight: '10px', fontSize: '20px' }} />
+                            <span className="textNavbar">Communication</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/resultats">
-                            <MenuBook style={{ marginRight: '10px', fontSize: '20px' }} />
-                            Résultats
+                            <MenuBook className="icon"
+                                style={{ marginRight: '10px', fontSize: '20px' }} />
+                            <span className="textNavbar">Résultats</span>
                         </NavLink>
                     </li>
                 </ul>

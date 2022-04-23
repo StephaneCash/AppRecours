@@ -9,10 +9,10 @@ function Dashboard() {
   return (
     <div className='col-md-12'>
       <div className='d-flex'>
-        <div className='col-2'>
+        <div className='col-2 navbarCol'>
           <SideBar />
         </div>
-        <div className='col-10 mt-4'>
+        <div className='col-10 mt-4 dashboardCol'>
           <div className='text-dashboard d-flex'>
             <h3>Dashboard Recours</h3>
             <h1 style={{ marginTop: '-10px' }}><AiOutlineDashboard /></h1>
