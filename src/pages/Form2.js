@@ -10,8 +10,6 @@ function Form2() {
 
     const { setCurrentStep, userData, setUserData } = useContext(multiStepContext);
 
-    const [pays, setPays] = useState([]);
-
     const [click, setClick] = useState(false);
     const [isValidPostnom, setIsValidPostnom] = useState(false);
     const [isValidNom, setIsValidNom] = useState(false);
