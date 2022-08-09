@@ -31,7 +31,7 @@ function Form2() {
         getAllCours();
     }, []);
 
-    console.log(data)
+    console.log(userData)
 
     const handleNom = (e) => {
         if (e.target.value === "") {
@@ -142,8 +142,14 @@ function Form2() {
                                     </> :
                                     <>
                                         <option>--Cours--</option>
-                                        <option>Hardware</option>
-                                        <option>Electronique I</option>
+                                        {data.data && data.data.map((val, index) => {
+                                            if (val.nom === userData.nomProf) {
+                                                val.cours.map((value, index) => {
+                                                    return <option>{value.nom}</option>
+                                                })
+                                            }
+                                        })}
+
                                     </>
                                 }
                             </select>
