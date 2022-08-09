@@ -169,7 +169,7 @@ function Form1() {
 
                     <div className="col-6 colonne62">
                         <label style={{ marginBottom: '10px' }}>Postnom:</label> <br />
-                        <input type="text" className='form-control'
+                        <input type="text" className='form-control' placeholder='Postnom'
                             value={userData['postnom']}
                             onChange={(e) => (setUserData({ ...userData, "postnom": e.target.value }), handlePostnom(e))}
                             style={{ width: '100%' }}

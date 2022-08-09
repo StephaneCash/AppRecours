@@ -70,45 +70,43 @@ function Form2() {
                         <div className="row">
                             <div className="col-6">
                                 <label style={{ marginBottom: '10px' }}>Nom:</label> <br />
-                                <TextField
-                                    helperText={
-                                        click === true &&
-                                        <>
-                                            {
-                                                isValidNom === false ? 'Veuillez renseigner le nom du professeur svp !' : ''
-                                            }
-                                        </>
-                                    }
-                                    label="Entrer un nom"
-                                    variant="outlined"
+                                <input
+                                    className='form-control' placeholder='Nom du prof.'
                                     style={{ width: '100%' }}
                                     value={userData['nomProf']}
                                     onChange={(e) => (setUserData({ ...userData, "nomProf": e.target.value }), handleNom(e))}
                                 />
+                                {
+                                    click === true &&
+                                    <>
+                                        {
+                                            isValidNom === false ? 'Veuillez renseigner le nom du professeur svp !' : ''
+                                        }
+                                    </>
+
+                                }
                             </div>
                             <div className="col-6">
                                 <label style={{ marginBottom: '10px' }}>Postnom:</label> <br />
-                                <TextField
-                                    helperText={
-                                        click === true &&
-                                        <>
-                                            {
-                                                isValidPostnom === false ?
-                                                    'Veuillez renseigner le postnom du professeur svp !' : ''
-                                            }
-                                        </>
-                                    }
-                                    label="Entrer un postnom"
-                                    variant="outlined"
+                                <input className="form-control" placeholder='Postnom'
                                     style={{ width: '100%' }}
                                     value={userData['postnomProf']}
                                     onChange={(e) => (setUserData({ ...userData, "postnomProf": e.target.value }), handlePostnom(e))}
                                 />
+                                {
+                                    click === true &&
+                                    <>
+                                        {
+                                            isValidPostnom === false ?
+                                                'Veuillez renseigner le postnom du professeur svp !' : ''
+                                        }
+                                    </>
+                                }
                             </div>
                         </div>
 
                         <div className='col-12'>
-                            <label className='mt-3' style={{ marginBottom: '10px' }}>Choisir un cours:</label> <br />
+                            <label className='mt-1' style={{ marginBottom: '10px' }}>Choisir un cours:</label> <br />
                             <select
                                 className="form-control"
                                 value={userData['cours']}
