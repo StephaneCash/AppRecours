@@ -22,7 +22,7 @@
     cursor: pointer;
 }
 
-.text-item{
+.text-item {
     white-space: nowrap;
 }
 
@@ -119,37 +119,45 @@
     letter-spacing: 0.03333em;
 }
 
-.btnCamera {
-    height: 7.6vh !important;
+input {
+    box-shadow: none !important;
 }
 
 @media(max-width:1205px) {
     .sidebar {
         width: 50px !important;
     }
-    .name, #name{
+
+    .name,
+    #name {
         display: none !important;
     }
-    .logo{
+
+    .logo {
         display: none !important;
     }
 }
 
-@media(max-width: 730px){
-    .form1.row, .form2 .row, .form3, .form41{
+@media(max-width: 730px) {
+
+    .form1.row,
+    .form2 .row,
+    .form3,
+    .form41 {
         display: block !important;
     }
-    .form1 .colonne6, .form2 .col-6, .form41 .col-6{
+
+    .form1 .colonne6,
+    .form2 .col-6,
+    .form41 .col-6 {
         width: 100% !important;
     }
 
-    .form1 .colonne62{
+    .form1 .colonne62 {
         width: 100% !important;
     }
 
-    .formB .MuiButton-root{
+    .formB .MuiButton-root {
         margin: 12px 5px 0 0 !important;
     }
 }
-
-

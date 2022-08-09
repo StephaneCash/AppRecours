@@ -24,7 +24,7 @@ function SideBar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/listrecours">
+                        <NavLink to="/recours">
                             <Book className="icon"
                                 style={{ marginRight: '10px', fontSize: '20px' }} />
 

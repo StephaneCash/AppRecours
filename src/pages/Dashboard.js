@@ -4,8 +4,12 @@ import "../css/Dashboard.css"
 import Earnings from '../components/Earnings';
 import ResultTraites from '../components/ResultTraites';
 import { AiOutlineDashboard } from "react-icons/ai";
+import authHeader from '../auth/authHeader';
 
 function Dashboard() {
+  const authorization = authHeader();
+  console.log(authorization)
+
   return (
     <div className='col-md-12'>
       <div className='d-flex'>

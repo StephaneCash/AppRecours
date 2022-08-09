@@ -41,7 +41,7 @@ function Form1() {
                 e.target.value === "Erreur de transcription de cotes de l'année"
             ) {
                 setObjChoisit(true);
-            }else{
+            } else {
                 setObjChoisit(false);
             }
         }
@@ -80,7 +80,9 @@ function Form1() {
             setisValidObjRecours(true);
         }
 
-    }, [isValidNom, isValidPromotion, isValidPostnom, isValidObjRecours, ]);
+    }, [isValidNom, isValidPromotion, isValidPostnom, isValidObjRecours,]);
+
+    const validationStyle = { color: 'red', fontSize: '13px' };
 
     return (
         <>
@@ -90,30 +92,28 @@ function Form1() {
                 <div className="row form1dFlex">
                     <div className="col-6 colonne6">
                         <label style={{ marginBottom: '10px' }}>Nom:</label> <br />
-                        <TextField
-                            helperText={
-                                click === true && (
-                                    <>
-                                        {isValidNom === false ? "Veuillez renseigner un nom svp !" : ""}
-                                    </>
-                                )
-                            }
-                            required={'required'}
-                            label="Nom"
-                            className="form1input"
-                            variant="outlined"
+                        <input type="text"
+                            className="form-control"
                             style={{ width: '100%' }}
+                            placeholder='Entrer un nom'
                             value={userData['nom']}
                             onChange={(e) => (setUserData({ ...userData, "nom": e.target.value }), handleNom(e))}
                         />
-                        <br /><br />
 
-                        <label style={{ marginBottom: '10px' }}>Choisir votre promotion:</label> <br />
+                        {
+                            click === true && (
+                                <>
+                                    {isValidNom === false ? <span style={validationStyle}>Veuillez renseigner un nom svp !</span> : ""}
+                                </>
+                            )
+                        }
+                        <br />
+
+                        <label style={{ marginBottom: '10px', marginTop:'5px' }}>Choisir votre promotion:</label> <br />
                         <select
                             className="form-control"
                             value={userData['promotionj']}
                             onChange={(e) => (setUserData({ ...userData, 'promotion': e.target.value }), handlePromotion(e))}
-                            style={{ width: "100%", marginRight: "10px", height: "61px", marginTop: '-5px', boxShadow: "none", border: "1px solid silver" }}
                         >
                             {userData.promotion ?
                                 <>
@@ -130,18 +130,17 @@ function Form1() {
                         {
                             click === true && (
                                 <>
-                                    {isValidPromotion === false ? <div className="sexeObligatoire mt-1">Veuillez choisir une promotion svp !</div> : ""}
+                                    {isValidPromotion === false ? <div style={validationStyle}>Veuillez choisir une promotion svp !</div> : ""}
                                 </>
                             )
                         }
-                        <br />
+                        
 
-                        <label style={{ marginBottom: '10px' }}>Choisir l'objet du recours:</label> <br />
+                        <label style={{ marginBottom: '10px',marginTop:'5px' }}>Choisir l'objet du recours:</label> <br />
                         <select
                             className="form-control"
                             value={userData['objetRecours']}
                             onChange={(e) => (setUserData({ ...userData, 'objetRecours': e.target.value }), handleObjectRecours(e))}
-                            style={{ width: "100%", marginRight: "10px", height: "61px", marginTop: '-5px', boxShadow: "none", border: "1px solid silver" }}
                         >
                             {userData.objetRecours ?
                                 <>
@@ -162,7 +161,7 @@ function Form1() {
                         {
                             click === true && (
                                 <>
-                                    {isValidObjRecours === false ? <div className="sexeObligatoire mt-1">Veuillez choisir l'objet du recours svp !</div> : ""}
+                                    {isValidObjRecours === false ? <div style={validationStyle} className="mt-1">Veuillez choisir l'objet du recours svp !</div> : ""}
                                 </>
                             )
                         }
@@ -170,20 +169,19 @@ function Form1() {
 
                     <div className="col-6 colonne62">
                         <label style={{ marginBottom: '10px' }}>Postnom:</label> <br />
-                        <TextField
-                            helperText={
-                                click === true && (
-                                    <>
-                                        {isValidPostnom === false ? "Veuillez renseigner votre postnom svp !" : ""}
-                                    </>
-                                )
-                            }
-                            label="Postnom"
-                            variant="outlined"
+                        <input type="text" className='form-control'
                             value={userData['postnom']}
                             onChange={(e) => (setUserData({ ...userData, "postnom": e.target.value }), handlePostnom(e))}
                             style={{ width: '100%' }}
-                        /> <br /><br />
+                        />
+                        {
+                            click === true && (
+                                <>
+                                    {isValidPostnom === false ? <span style={validationStyle}>Veuillez renseigner votre postnom svp !</span> : ""}
+                                </>
+                            )
+                        }
+                        <br />
 
                         <label style={{ marginBottom: '10px' }}>Cotes marquées sur le bulletin:</label> <br />
                         <div className="col-12 row"
@@ -192,42 +190,40 @@ function Form1() {
 
                             <div className="col-6">
                                 <label style={{ marginBottom: '10px' }}>Année:</label> <br />
-                                <TextField
-                                    helperText={
-                                        click === true && (
-                                            <>
-                                                {objChoist ? "Veuillez renseigner une cote de l'année svp !" : ""}
-                                            </>
-                                        )
-                                    }
-                                    className="mb-3"
+                                <input
+                                    className="mb-3 form-control"
                                     type="number"
-                                    variant="outlined"
                                     placeholder='Renseigner le cote année'
                                     value={userData['coteAnnee']}
                                     onChange={(e) => (setUserData({ ...userData, "coteAnnee": e.target.value }))}
                                     style={{ width: '100%' }}
                                 />
+                                {
+                                    click === true && (
+                                        <>
+                                            {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'année svp !</span> : ""}
+                                        </>
+                                    )
+                                }
                             </div>
 
                             <div className="col-6">
 
                                 <label style={{ marginBottom: '10px' }}>Examen:</label> <br />
-                                <TextField
-                                    helperText={
-                                        click === true && (
-                                            <>
-                                                {objChoist ? "Veuillez renseigner une cote de l'examen svp !" : ""}
-                                            </>
-                                        )
-                                    }
+                                <input className='form-control'
                                     type="number"
                                     placeholder='Renseigner le cote examen'
-                                    variant="outlined"
                                     value={userData['coteExamen']}
                                     onChange={(e) => (setUserData({ ...userData, "coteExamen": e.target.value }))}
                                     style={{ width: '100%' }}
                                 />
+                                {
+                                    click === true && (
+                                        <>
+                                            {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'examen svp !</span> : ""}
+                                        </>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
