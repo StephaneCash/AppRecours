@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Button, TextField, Card } from "@material-ui/core";
+import { Button, Card } from "@material-ui/core";
 import "../css/Form.css";
 import { multiStepContext } from "../StepContext";
 import InputAdornment from '@mui/material/InputAdornment';
 import { MenuBook } from '@material-ui/icons';
-
+import axios from 'axios';
 
 function Form2() {
 
@@ -14,6 +14,24 @@ function Form2() {
     const [isValidPostnom, setIsValidPostnom] = useState(false);
     const [isValidNom, setIsValidNom] = useState(false);
     const [isValidCours, setIsValidCours] = useState(false);
+
+    const [data, setData] = useState([]);
+
+    const getAllCours = () => {
+        axios.get(`http://localhost:5000/api/profs`)
+            .then(resp => {
+                setData(resp.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    };
+
+    useEffect(() => {
+        getAllCours();
+    }, []);
+
+    console.log(data)
 
     const handleNom = (e) => {
         if (e.target.value === "") {
@@ -68,12 +86,18 @@ function Form2() {
                         <div className="row">
                             <div className="col-6">
                                 <label style={{ marginBottom: '10px' }}>Nom:</label> <br />
-                                <input
+                                <select
                                     className='form-control' placeholder='Nom du prof.'
                                     style={{ width: '100%' }}
                                     value={userData['nomProf']}
                                     onChange={(e) => (setUserData({ ...userData, "nomProf": e.target.value }), handleNom(e))}
-                                />
+                                >
+                                    {data.data && data.data.map((val, index) => {
+                                        return (
+                                            <option>{val.nom}</option>
+                                        )
+                                    })}
+                                </select>
                                 {
                                     click === true &&
                                     <>
