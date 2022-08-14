@@ -25,7 +25,7 @@ function Login() {
 
     const handlePwd = (e) => {
         setPwd(e.target.value);
-    }
+    } 
 
     let navigate = useNavigate();
 
