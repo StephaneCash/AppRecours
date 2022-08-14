@@ -208,7 +208,6 @@ function Form1() {
                             </div>
 
                             <div className="col-6">
-
                                 <label style={{ marginBottom: '10px' }}>Examen:</label> <br />
                                 <input className='form-control'
                                     type="number"
