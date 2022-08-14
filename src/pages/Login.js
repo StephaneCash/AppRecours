@@ -18,7 +18,7 @@ function Login() {
     const handleEmail = (e) => {  
         if (e.target.value === "") {
             setIsValidEmail(true);
-        } else {
+        } else { 
             setIsValidEmail(false);
         }
     }
