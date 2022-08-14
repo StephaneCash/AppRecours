@@ -10,10 +10,7 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
-
     const [err, setErr] = useState({});
-
-    console.log('ERREURS :: ', err)
 
     // Is Valids Inputs
     const [isValidEmail, setIsValidEmail] = useState(false);
