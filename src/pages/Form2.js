@@ -172,7 +172,6 @@ function Form2() {
                     <div className="col-12 container">
                         <div className="row">
                             <div className="col-12">
-
                                 <Button
                                     className='mb-3 mt-3 btn-confirm'
                                     type="submit"
