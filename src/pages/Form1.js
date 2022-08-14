@@ -187,7 +187,7 @@ function Form1() {
                             style={{ border: "1px solid silver", height: 'auto', padding: '20px', marginLeft: '3px' }}
                         >
 
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <label style={{ marginBottom: '10px' }}>Année:</label> <br />
                                 <input
                                     className="mb-3 form-control"
@@ -206,7 +206,7 @@ function Form1() {
                                 }
                             </div>
 
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <label style={{ marginBottom: '10px' }}>Examen:</label> <br />
                                 <input className='form-control'
                                     type="number"
