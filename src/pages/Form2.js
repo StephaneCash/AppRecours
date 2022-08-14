@@ -48,8 +48,6 @@ function Form2() {
         getDataProfByName();
     }, [nomProf]);
 
-    console.log(dataProfOne)
-
     const handleNom = (e) => {
         if (e.target.value === "") {
             setIsValidNom(false);
