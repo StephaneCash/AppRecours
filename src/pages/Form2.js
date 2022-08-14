@@ -87,7 +87,7 @@ function Form2() {
     return (
         <>
             <h3 className="text-center mt-1">Identité de l'enseignant</h3>
-            <h3 className='text-center'><Person style={{color:'blue'}} /></h3>
+            <h3 className='text-center'><Person color='primary' /></h3>
             <Card>
                 <form onSubmit={nextStep}>
                     <div className="col-10 container form2 mt-3">
