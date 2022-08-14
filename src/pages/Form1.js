@@ -226,7 +226,7 @@ function Form1() {
                                 </div>
                             </div>
 
-                            <div className='row' style={{margin:'7px'}}>
+                            <div className='row' style={{margin:'0px'}}>
                                 <input type='file' className='col-sm-12 form-control' style={{ width: "100%" }} />
                             </div>
                         </div>
