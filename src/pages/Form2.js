@@ -16,6 +16,8 @@ function Form2() {
     const [isValidCours, setIsValidCours] = useState(false);
 
     const [data, setData] = useState([]);
+    const [nomProf, setNomProf] = useState("");
+    const [dataProfOne, setDataProfOne] = useState([]);
 
     const getAllCours = () => {
         axios.get(`http://localhost:5000/api/profs`)
@@ -27,17 +29,34 @@ function Form2() {
             })
     };
 
+    const getDataProfByName = () => {
+        if (nomProf) {
+            axios.get(`http://localhost:5000/api/profs?name=${nomProf}`)
+                .then(res => {
+                    setDataProfOne(res.data);
+                })
+                .catch(err => {
+                    console.log("ERREUR ", err)
+                })
+        }
+    }
+
     useEffect(() => {
         getAllCours();
     }, []);
 
-    console.log(userData)
+    useEffect(() => {
+        getDataProfByName();
+    }, [nomProf]);
+
+    console.log(dataProfOne)
 
     const handleNom = (e) => {
         if (e.target.value === "") {
             setIsValidNom(false);
         } else {
             setIsValidNom(true);
+            setNomProf(e.target.value.split(" ")[0]);
         }
     };
 
@@ -55,6 +74,7 @@ function Form2() {
         } else {
             setIsValidCours(true);
         }
+        console.log("COUSR :: ", e.target.value)
     }
 
     useEffect(() => {
@@ -84,8 +104,8 @@ function Form2() {
                 <form onSubmit={nextStep}>
                     <div className="col-10 container form2 mt-3">
                         <div className="row">
-                            <div className="col-6">
-                                <label style={{ marginBottom: '10px' }}>Nom:</label> <br />
+                            <div className="col-sm-6">
+                                <label style={{ marginBottom: '10px' }}>Choisir le nom du prof:</label> <br />
                                 <select
                                     className='form-control' placeholder='Nom du prof.'
                                     style={{ width: '100%' }}
@@ -94,7 +114,7 @@ function Form2() {
                                 >
                                     {data.data && data.data.map((val, index) => {
                                         return (
-                                            <option>{val.nom}</option>
+                                            <option key={index}>{val.nom} {val.postnom}</option>
                                         )
                                     })}
                                 </select>
@@ -108,7 +128,7 @@ function Form2() {
 
                                 }
                             </div>
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <label style={{ marginBottom: '10px' }}>Postnom:</label> <br />
                                 <input className="form-control" placeholder='Postnom'
                                     style={{ width: '100%' }}
@@ -135,24 +155,22 @@ function Form2() {
                                 onChange={(e) => (setUserData({ ...userData, 'cours': e.target.value }), handleCours(e))}
                                 style={{ width: "100%", marginRight: "10px", height: "61px", marginTop: '-5px', boxShadow: "none", border: "1px solid silver" }}
                             >
-                                {userData.cours ?
-                                    <>
-                                        <option>Hardware</option>
-                                        <option>Electronique I</option>
-                                    </> :
-                                    <>
-                                        <option>--Cours--</option>
-                                        {data.data && data.data.map((val, index) => {
-                                            if (val.nom === userData.nomProf) {
-                                                val.cours.map((value, index) => {
-                                                    return <option>{value.nom}</option>
-                                                })
-                                            }
-                                        })}
+                                <option>--Cours--</option>
+                                {dataProfOne.data && dataProfOne.data.map((val, index) => {
+                                    return val.cours.map((val, index) => {
+                                        return (
+                                            <>
+                                                <option key={index}>{val.nom}</option>
+                                            </>
+                                        )
+                                    })
+                                })}
 
-                                    </>
-                                }
                             </select>
+
+                            {
+                                userData.cours !== "--Cours--" ? <>Cours choisi : <span style={{ color: "green" }}>{userData.cours}</span>.</> : ' Aucun cours n\'a été choisi.'
+                            }
 
                             {
                                 click === true && (
