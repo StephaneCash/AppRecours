@@ -73,14 +73,6 @@ function Form2() {
         }
     }
 
-    useEffect(() => {
-        if (userData.nomProf) {
-
-        };
-
-
-    }, []);
-
     const nextStep = (e) => {
         e.preventDefault();
         setClick(true);
