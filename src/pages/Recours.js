@@ -7,7 +7,7 @@ function Recours() {
         <div className='col-md-12'>
             <div className='d-flex'>
                 <div className='col-2'>
-                    <SideBar />
+                    <SideBar /> 
                 </div> 
                 <div className='col-10'>
 
