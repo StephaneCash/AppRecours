@@ -138,6 +138,8 @@ input {
     }
 }
 
-@media(max-width: 730px) {
+@media(max-width: 730px) {}
 
+button {
+    cursor: pointer !important;
 }
