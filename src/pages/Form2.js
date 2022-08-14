@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Button, Card } from "@material-ui/core";
 import "../css/Form.css";
 import { multiStepContext } from "../StepContext";
-import { MenuBook } from '@material-ui/icons';
+import { MenuBook, Person } from '@material-ui/icons';
 import axios from 'axios';
 
 function Form2() {
@@ -87,7 +87,7 @@ function Form2() {
     return (
         <>
             <h3 className="text-center mt-1">Identité de l'enseignant</h3>
-            <h3 className='text-center'><MenuBook /></h3>
+            <h3 className='text-center'><Person style={{color:'blue'}} /></h3>
             <Card>
                 <form onSubmit={nextStep}>
                     <div className="col-10 container form2 mt-3">
