@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import SideBar from '../components/SideBar'
- jh
+ 
 function Recours() {
     return (
-
         <div className='col-md-12'>
             <div className='d-flex'>
                 <div className='col-2'>
