@@ -27,7 +27,7 @@ function Form2() {
                 console.log(err)
             })
     };
- 
+
     const getDataProfByName = () => {
         if (nomProf) {
             axios.get(`http://localhost:5000/api/profs?name=${nomProf}`)
@@ -107,6 +107,9 @@ function Form2() {
                                     })}
                                 </select>
                                 {
+                                    userData.nomProf ? <>Professeur choisi : <span style={{ color: "green" }}>{userData.nomProf}</span>.</> : ' Aucun cours n\'a été choisi.'
+                                }
+                                {
                                     click === true &&
                                     <>
                                         {
@@ -151,21 +154,21 @@ function Form2() {
                                             </>
                                         )
                                     })
-                                })} 
- 
+                                })}
+
                             </select>
 
                             {
                                 userData.cours !== "--Cours--" ? <>Cours choisi : <span style={{ color: "green" }}>{userData.cours}</span>.</> : ' Aucun cours n\'a été choisi.'
                             }
- 
+
                             {
                                 click === true && (
                                     <>
                                         {isValidCours === false ? <div className="sexeObligatoire mt-1">Veuillez choisir le nom du cours svp !</div> : ""}
                                     </>
                                 )
-                            } 
+                            }
                         </div>
 
                     </div>
