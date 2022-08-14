@@ -71,7 +71,6 @@ function Form2() {
         } else {
             setIsValidCours(true);
         }
-        console.log("COUSR :: ", e.target.value)
     }
 
     useEffect(() => {
