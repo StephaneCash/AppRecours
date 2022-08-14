@@ -109,7 +109,7 @@ function Form1() {
                         }
                         <br />
 
-                        <label style={{ marginBottom: '10px', marginTop:'5px' }}>Choisir votre filière:</label> <br />
+                        <label style={{ marginBottom: '10px', marginTop: '5px' }}>Choisir votre filière:</label> <br />
                         <select
                             className="form-control"
                             value={userData['promotionj']}
@@ -134,8 +134,8 @@ function Form1() {
                                 </>
                             )
                         }
-                        
-                        <label style={{ marginBottom: '10px',marginTop:'5px' }}>Choisir l'objet du recours:</label> <br />
+
+                        <label style={{ marginBottom: '10px', marginTop: '5px' }}>Choisir l'objet du recours:</label> <br />
                         <select
                             className="form-control"
                             value={userData['objetRecours']}
@@ -223,6 +223,9 @@ function Form1() {
                                     )
                                 }
                             </div>
+                            
+                            <input type='file' className='col-sm-12 form-control' style={{ width: "100%" }} />
+
                         </div>
                     </div>
                 </div>
