@@ -28,7 +28,7 @@ function Form2() {
                 console.log(err)
             })
     };
-
+ 
     const getDataProfByName = () => {
         if (nomProf) {
             axios.get(`http://localhost:5000/api/profs?name=${nomProf}`)
