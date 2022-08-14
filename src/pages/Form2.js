@@ -178,7 +178,7 @@ function Form2() {
                                         {isValidCours === false ? <div className="sexeObligatoire mt-1">Veuillez choisir le nom du cours svp !</div> : ""}
                                     </>
                                 )
-                            }
+                            } 
                         </div>
 
 
