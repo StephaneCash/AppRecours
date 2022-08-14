@@ -109,7 +109,7 @@ function Form1() {
                         }
                         <br />
 
-                        <label style={{ marginBottom: '10px', marginTop:'5px' }}>Choisir votre promotion:</label> <br />
+                        <label style={{ marginBottom: '10px', marginTop:'5px' }}>Choisir votre filière:</label> <br />
                         <select
                             className="form-control"
                             value={userData['promotionj']}
