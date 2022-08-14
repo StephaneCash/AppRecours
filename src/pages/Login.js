@@ -15,7 +15,7 @@ function Login() {
     // Is Valids Inputs
     const [isValidEmail, setIsValidEmail] = useState(false);
 
-    const handleEmail = (e) => {
+    const handleEmail = (e) => { 
         if (e.target.value === "") {
             setIsValidEmail(true);
         } else {
