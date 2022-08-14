@@ -21,7 +21,7 @@ function Login() {
         } else { 
             setIsValidEmail(false);
         }
-    }
+    } 
 
     const handlePwd = (e) => {
         setPwd(e.target.value);
