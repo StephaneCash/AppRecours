@@ -171,7 +171,7 @@ function Form2() {
                             {
                                 userData.cours !== "--Cours--" ? <>Cours choisi : <span style={{ color: "green" }}>{userData.cours}</span>.</> : ' Aucun cours n\'a été choisi.'
                             }
-
+ 
                             {
                                 click === true && (
                                     <>
