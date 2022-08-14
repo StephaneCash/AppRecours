@@ -183,49 +183,52 @@ function Form1() {
                         <br />
 
                         <label style={{ marginBottom: '10px' }}>Cotes marquées sur le bulletin:</label> <br />
-                        <div className="col-12 row"
+                        <div className="col-12"
                             style={{ border: "1px solid silver", height: 'auto', padding: '20px', marginLeft: '3px' }}
                         >
 
-                            <div className="col-sm-6">
-                                <label style={{ marginBottom: '10px' }}>Année:</label> <br />
-                                <input
-                                    className="mb-3 form-control"
-                                    type="number"
-                                    placeholder='Renseigner le cote année'
-                                    value={userData['coteAnnee']}
-                                    onChange={(e) => (setUserData({ ...userData, "coteAnnee": e.target.value }))}
-                                    style={{ width: '100%' }}
-                                />
-                                {
-                                    click === true && (
-                                        <>
-                                            {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'année svp !</span> : ""}
-                                        </>
-                                    )
-                                }
+                            <div className="row">
+                                <div className="col-sm-6">
+                                    <label style={{ marginBottom: '10px' }}>Année:</label> <br />
+                                    <input
+                                        className="mb-3 form-control"
+                                        type="number"
+                                        placeholder='Renseigner le cote année'
+                                        value={userData['coteAnnee']}
+                                        onChange={(e) => (setUserData({ ...userData, "coteAnnee": e.target.value }))}
+                                        style={{ width: '100%' }}
+                                    />
+                                    {
+                                        click === true && (
+                                            <>
+                                                {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'année svp !</span> : ""}
+                                            </>
+                                        )
+                                    }
+                                </div>
+
+                                <div className="col-sm-6">
+                                    <label style={{ marginBottom: '10px' }}>Examen:</label> <br />
+                                    <input className='form-control'
+                                        type="number"
+                                        placeholder='Renseigner le cote examen'
+                                        value={userData['coteExamen']}
+                                        onChange={(e) => (setUserData({ ...userData, "coteExamen": e.target.value }))}
+                                        style={{ width: '100%' }}
+                                    />
+                                    {
+                                        click === true && (
+                                            <>
+                                                {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'examen svp !</span> : ""}
+                                            </>
+                                        )
+                                    }
+                                </div>
                             </div>
 
-                            <div className="col-sm-6">
-                                <label style={{ marginBottom: '10px' }}>Examen:</label> <br />
-                                <input className='form-control'
-                                    type="number"
-                                    placeholder='Renseigner le cote examen'
-                                    value={userData['coteExamen']}
-                                    onChange={(e) => (setUserData({ ...userData, "coteExamen": e.target.value }))}
-                                    style={{ width: '100%' }}
-                                />
-                                {
-                                    click === true && (
-                                        <>
-                                            {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'examen svp !</span> : ""}
-                                        </>
-                                    )
-                                }
+                            <div className='row' style={{margin:'7px'}}>
+                                <input type='file' className='col-sm-12 form-control' style={{ width: "100%" }} />
                             </div>
-                            
-                            <input type='file' className='col-sm-12 form-control' style={{ width: "100%" }} />
-
                         </div>
                     </div>
                 </div>
