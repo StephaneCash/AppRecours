@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Button, Card } from "@material-ui/core";
 import "../css/Form.css";
 import { multiStepContext } from "../StepContext";
-import InputAdornment from '@mui/material/InputAdornment';
 import { MenuBook } from '@material-ui/icons';
 import axios from 'axios';
 
