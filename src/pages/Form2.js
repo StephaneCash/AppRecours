@@ -116,7 +116,7 @@ function Form2() {
                                             isValidNom === false ? 'Veuillez renseigner le nom du professeur svp !' : ''
                                         }
                                     </>
-                                }
+                                } 
                             </div>
                             <div className="col-sm-6">
                                 <label style={{ marginBottom: '10px' }}>Postnom:</label> <br />
