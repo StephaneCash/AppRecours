@@ -110,7 +110,7 @@ function Form2() {
                                     userData.nomProf ? <>Professeur choisi : <span style={{ color: "green" }}>{userData.nomProf}</span>.</> : ' Aucun cours n\'a été choisi.'
                                 }
                                 {
-                                    click === true &&
+                                    click === true && 
                                     <>
                                         {
                                             isValidNom === false ? 'Veuillez renseigner le nom du professeur svp !' : ''
