@@ -3,7 +3,7 @@ import { Button, } from "@material-ui/core";
 import "../css/Form.css";
 import { multiStepContext } from "../StepContext";
 import { School } from '@material-ui/icons';
-
+import axios from "axios";
 
 function Form1() {
 
@@ -84,6 +84,20 @@ function Form1() {
 
     const validationStyle = { color: 'red', fontSize: '13px' };
 
+    const [filiere, setFiliere] = useState([]);
+
+    const getFilieres = () => {
+        axios.get(`http://localhost:5000/api/filieres`).then(resp => {
+            setFiliere(resp.data);
+        }).catch(err => {
+            console.log(err)
+        })
+    };
+
+    useEffect(() => {
+        getFilieres();
+    }, []);
+
     return (
         <>
             <h3 className="text-center mt-1">Identité de l'étudiant</h3>
@@ -115,16 +129,12 @@ function Form1() {
                             value={userData['promotionj']}
                             onChange={(e) => (setUserData({ ...userData, 'promotion': e.target.value }), handlePromotion(e))}
                         >
-                            {userData.promotion ?
-                                <>
-                                    <option>G1 Electronique</option>
-                                    <option>G1 Informatique Industrielle</option>
-                                </> :
-                                <>
-                                    <option>--Promotion--</option>
-                                    <option>G1 Informatique Industrielle</option>
-                                    <option>G1 Electronique</option>
-                                </>
+                            {
+                                filiere.data ? filiere.data.map((val, index) => {
+                                    return (
+                                        <option>{val.nom}</option>
+                                    )
+                                }) : <option>Pas de données.</option>
                             }
                         </select>
                         {
@@ -226,7 +236,7 @@ function Form1() {
                                 </div>
                             </div>
 
-                            <div className='row' style={{margin:'0px'}}>
+                            <div className='row' style={{ margin: '0px' }}>
                                 <input type='file' className='col-sm-12 form-control mt-2' style={{ width: "100%" }} />
                             </div>
                         </div>
