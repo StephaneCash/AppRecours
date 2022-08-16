@@ -49,6 +49,18 @@ function Filieres() {
         getAllFilieres();
     }, []);
 
+    const deleteFiliere = (id) => {
+        axios.delete(`http://localhost:5000/api/filieres/${id}`)
+            .then(resp => {
+                alert(resp.data.message)
+                getAllFilieres();
+                console.log(resp.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     return (
         <div className='col-md-12'>
             <div className='d-flex'>
@@ -72,14 +84,15 @@ function Filieres() {
                                                     placeholder="Entrer le nom de la filière" /> <br /><br />
                                             </div>
                                             <div className="col-sm-4">
-                                        
-                                                <button type='button' style={{ marginLeft:'65px',
+
+                                                <button type='button' style={{
+                                                    marginLeft: '65px',
                                                     float: 'right', padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                                 }} onClick={closeFormAdd}>
                                                     Fermer le formulaire d'ajout
                                                 </button>
 
-                                                <button type='button' style={{ 
+                                                <button type='button' style={{
                                                     float: 'right', padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                                 }} onClick={submitData}>
                                                     {clicAdd ? "Ajout en cours..." : "Ajouter"}
@@ -115,7 +128,12 @@ function Filieres() {
                                                     <tr>
                                                         <td>{index + 1}</td>
                                                         <td>{val.nom}</td>
-                                                        <td>Supprimer</td>
+                                                        <td>
+                                                            <button style={{
+                                                                flex: '1', float: 'right', textAlign: 'right',
+                                                                padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
+                                                            }} onClick={() => deleteFiliere(val.id)}>Supprimer</button>
+                                                        </td>
                                                     </tr>
                                                 )
                                             }) : "Pas de data."}
