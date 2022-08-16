@@ -7,6 +7,8 @@ function ReceivedDataForm() {
     const { setCurrentStep, userData, setUserData } = useContext(multiStepContext);
     const [data, setData] = useState([userData]);
 
+    console.log(userData ,  ' :::::: DATA USER')
+
     return (
         <div className='col-md-12 container'>
             <h3 className="text-center">Identité Etudiant</h3>
