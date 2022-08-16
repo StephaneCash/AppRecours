@@ -11,6 +11,7 @@ function RoutesEtudiants() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />} />
+        <Route path="/filieres/addFiliere" element={<addRecours />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/recours/addRecours' element={<ListRecours />} />
         <Route path='/recours' element={<Recours />} />
