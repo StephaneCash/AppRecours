@@ -46,10 +46,10 @@ function SideBar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/resultats">
+                        <NavLink to="/filieres">
                             <MenuBook className="icon"
                                 style={{ marginRight: '10px', fontSize: '20px' }} />
-                            <span className="textNavbar">Résultats</span>
+                            <span className="textNavbar">Filières</span>
                         </NavLink>
                     </li>
                 </ul>
