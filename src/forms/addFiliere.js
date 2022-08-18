@@ -32,16 +32,24 @@ function AddFiliere() {
         getOneUser();
     }, [id]);
 
+    const changeValue = (e) => {
+        if (state) {
+            valueInput.current.value = e.target.value;
+        } else {
+            //setNomFiliere(nomFiliere, [value]: e)
+        }
+    }
+
     const editFiliere = () => {
         axios.put(`http://localhost:5000/api/filieres/${state.id}`, { nom: valueInput.current.value })
-        .then(resp=>{
-            swal({title:'Succès', icon:'success', text: "Filière editée avec succès"});
-            navigate('/filieres');
-        })
-        .catch(err=>{
-            console.log(err);
-            swal({title:'Echec', icon:'error', text: "Filière Non Modifiée"});
-        })
+            .then(resp => {
+                swal({ title: 'Succès', icon: 'success', text: "Filière editée avec succès" });
+                navigate('/filieres');
+            })
+            .catch(err => {
+                console.log(err);
+                swal({ title: 'Echec', icon: 'error', text: "Filière Non Modifiée" });
+            })
     }
 
     const submitData = () => {
@@ -81,7 +89,7 @@ function AddFiliere() {
                                     </h6><br />
                                     <div className='row'>
                                         <div className="col-sm-6">
-                                            <input id="text" type="text" value={state ? oneFil?.data?.nom : nomFiliere} className='form-control' onChange={(e) => setNomFiliere(e.target.value)}
+                                            <input id="text" type="text" value={state ? oneFil?.data?.nom : nomFiliere} className='form-control' onChange={(e) => changeValue()}
                                                 placeholder="Entrer le nom de la filière" ref={valueInput} /> <br /><br />
                                         </div>
                                         <div className="col-sm-2">
