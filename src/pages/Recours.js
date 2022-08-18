@@ -10,7 +10,6 @@ function Recours() {
                     <SideBar /> 
                 </div> 
                 <div className='col-10'>
-
                     <div className='mainRecours container'>
                         <main>
                             <section className="recent">

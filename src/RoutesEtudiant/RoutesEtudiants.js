@@ -4,6 +4,7 @@ import ListRecours from "../pages/ListRecours";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Recours from '../pages/Recours';
+import AddFiliere from "../forms/AddFiliere";
 import Filieres from "../pages/Filieres";
 
 function RoutesEtudiants() {
@@ -16,6 +17,7 @@ function RoutesEtudiants() {
         <Route path='/recours/addRecours' element={<ListRecours />} />
         <Route path='/recours' element={<Recours />} />
         <Route path='/filieres' element={<Filieres />} />
+        <Route path="/filieres/add-filiere" element={<AddFiliere />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,41 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import SideBar from '../components/SideBar';
-//import addFiliere from '../forms/addFiliere';
+import { NavLink } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 
 function Filieres() {
 
-    const [nomFiliere, setNomFiliere] = useState("");
-    const [showF, setShowF] = useState(false);
-    const [clicAdd, setClickAdd] = useState(false);
     const [dataFilieres, setDataFilieres] = useState([]);
-
-    const showFormAddFiliere = () => {
-        setShowF(true);
-    };
-
-    const closeFormAdd = () => {
-        setShowF(false);
-    };
-
-    const submitData = () => {
-        setClickAdd(true);
-        if (nomFiliere === "") {
-            alert("Veuillez entrer le nom d'une filière svp !");
-        }
-        axios.post(`http://localhost:5000/api/filieres`, { nom: nomFiliere })
-            .then(resp => {
-                console.log(resp);
-                const filiereInput = document.getElementById('text');
-                filiereInput.value = '';
-                setClickAdd(false);
-                getAllFilieres();
-            })
-            .catch(err => {
-                console.log(err);
-                setClickAdd(false);
-            })
-    }
 
     const getAllFilieres = () => {
         axios.get('http://localhost:5000/api/filieres').then(resp => {
@@ -50,15 +21,30 @@ function Filieres() {
     }, []);
 
     const deleteFiliere = (id) => {
-        axios.delete(`http://localhost:5000/api/filieres/${id}`)
-            .then(resp => {
-                alert(resp.data.message)
-                getAllFilieres();
-                console.log(resp.data)
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer cette filière ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                axios.delete(`http://localhost:5000/api/filieres/${id}`)
+                    .then(resp => {
+                        getAllFilieres();
+                        console.log(resp.data);
+                        swal('Filière supprimée avec succès', {
+                            icon: "success",
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
     }
 
     return (
@@ -68,49 +54,21 @@ function Filieres() {
                     <SideBar />
                 </div>
                 <div className='col-10'>
-
                     <div className='mainRecours container'>
                         <main>
                             <section className="recent">
                                 <h4>Liste de filières</h4>
-                                {
-                                    showF &&
-                                    <div className="col-sm-12">
 
-                                        <label>Ajouter une filière</label> <br />
-                                        <div className='row'>
-                                            <div className="col-sm-6">
-                                                <input id="text" type="text" className='form-control' onChange={(e) => setNomFiliere(e.target.value)}
-                                                    placeholder="Entrer le nom de la filière" /> <br /><br />
-                                            </div>
-                                            <div className="col-sm-4">
-
-                                                <button type='button' style={{
-                                                    marginLeft: '65px',
-                                                    float: 'right', padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                                }} onClick={closeFormAdd}>
-                                                    Fermer le formulaire d'ajout
-                                                </button>
-
-                                                <button type='button' style={{
-                                                    float: 'right', padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                                }} onClick={submitData}>
-                                                    {clicAdd ? "Ajout en cours..." : "Ajouter"}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
                                 <div className='d-flex'>
                                     <div className="col-2">Filière</div>
 
                                     <div className='col-10'>
-                                        <div style={{ textAlign: 'right' }}>
+                                        <NavLink to='add-filiere' style={{ textAlign: 'right' }}>
                                             <button style={{
-                                                flex: '1', float: 'right', textAlign: 'right',
+                                                flex: '1', float: 'right', textAlign: 'right', marginBottom: '10px',
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                            }} onClick={showFormAddFiliere}>Ajouter une filière</button>
-                                        </div>
+                                            }} >Ajouter une filière</button>
+                                        </NavLink>
                                     </div>
                                 </div>
                                 <div className='col-sm-12'>
@@ -119,7 +77,8 @@ function Filieres() {
                                             <tr>
                                                 <th>N°</th>
                                                 <th>Nom</th>
-                                                <th>Options</th>
+                                                <th style={{ width: "240px" }}>Date de création</th>
+                                                <th style={{ width: "200px" }}>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -128,15 +87,28 @@ function Filieres() {
                                                     <tr>
                                                         <td>{index + 1}</td>
                                                         <td>{val.nom}</td>
+                                                        <td>Le {val.createdAt.substring(0, 10)}, à {val.createdAt.substring(11, 20)}</td>
                                                         <td>
+
                                                             <button style={{
-                                                                flex: '1', float: 'right', textAlign: 'right',
+                                                                flex: '1', float: 'right', textAlign: 'right', marginLeft: '5px',
                                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                                             }} onClick={() => deleteFiliere(val.id)}>Supprimer</button>
+
+                                                            <NavLink to={{ pathname: "add-filiere" }} state={{ id: val.id }}>
+                                                                <button style={{
+                                                                    flex: '1', float: 'right', textAlign: 'right',
+                                                                    padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
+                                                                }}>Modifier</button>
+                                                            </NavLink>
                                                         </td>
                                                     </tr>
                                                 )
-                                            }) : "Pas de data."}
+                                            }) :
+                                                <tr>
+                                                    <td colSpan='3px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i> Chargement...</td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
 
