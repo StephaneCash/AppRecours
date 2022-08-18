@@ -106,7 +106,7 @@ function Filieres() {
                                                 )
                                             }) :
                                                 <tr>
-                                                    <td colSpan='3px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i> Chargement...</td>
+                                                    <td colSpan='3px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
                                                 </tr>
                                             }
                                         </tbody>
