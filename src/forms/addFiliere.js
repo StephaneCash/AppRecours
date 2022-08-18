@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SideBar from '../components/SideBar';
 import axios from "axios";
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
@@ -12,6 +12,8 @@ function AddFiliere() {
     const [oneFil, setOneFil] = useState([])
 
     const navigate = useNavigate();
+
+    const valueInput = useRef();
 
     const location = useLocation();
     const { state } = location;
@@ -30,6 +32,18 @@ function AddFiliere() {
         getOneUser();
     }, [id]);
 
+    const editFiliere = () => {
+        axios.put(`http://localhost:5000/api/filieres/${state.id}`, { nom: valueInput.current.value })
+        .then(resp=>{
+            swal({title:'Succès', icon:'success', text: "Filière editée avec succès"});
+            navigate('/filieres');
+        })
+        .catch(err=>{
+            console.log(err);
+            swal({title:'Echec', icon:'error', text: "Filière Non Modifiée"});
+        })
+    }
+
     const submitData = () => {
         if (nomFiliere === "") {
             alert("Veuillez entrer le nom d'une filière svp !");
@@ -41,11 +55,12 @@ function AddFiliere() {
                 filiereInput.value = '';
                 setClickAdd(false);
                 navigate('/filieres');
-                swal({ title: "Succès", icon: 'success', text: 'Filière ajoutée avec succès' })
+                swal({ title: "Succès", icon: 'success', text: 'Filière ajoutée avec succès' });
             })
             .catch(err => {
                 console.log(err);
                 setClickAdd(false);
+                swal({ title: "Echec", icon: 'error', text: 'Filière non ajoutée' });
             })
     }
 
@@ -67,14 +82,14 @@ function AddFiliere() {
                                     <div className='row'>
                                         <div className="col-sm-6">
                                             <input id="text" type="text" value={state ? oneFil?.data?.nom : nomFiliere} className='form-control' onChange={(e) => setNomFiliere(e.target.value)}
-                                                placeholder="Entrer le nom de la filière" /> <br /><br />
+                                                placeholder="Entrer le nom de la filière" ref={valueInput} /> <br /><br />
                                         </div>
                                         <div className="col-sm-2">
 
                                             <button type='button' style={{
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                            }} onClick={submitData}>
-                                                {clicAdd ? "Ajout en cours..." : "Ajouter"}
+                                            }} onClick={state ? editFiliere : submitData}>
+                                                {clicAdd ? state ? "Edition en cours..." : "Ajout en cours..." : state ? "Editer" : "Ajouter"}
                                             </button>
                                         </div>
                                     </div>
