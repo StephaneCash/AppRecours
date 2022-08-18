@@ -9,7 +9,10 @@ function AddFiliere() {
     const [nomFiliere, setNomFiliere] = useState("");
     const [clicAdd, setClickAdd] = useState(false);
     const [id, setId] = useState(0);
-    const [oneFil, setOneFil] = useState([])
+    const [oneFil, setOneFil] = useState([]);
+
+    const initialiseValues = { id: "", nom: "" };
+    const [formData, setFormData] = useState(initialiseValues);
 
     const navigate = useNavigate();
 
@@ -33,11 +36,9 @@ function AddFiliere() {
     }, [id]);
 
     const changeValue = (e) => {
-        if (state) {
-            valueInput.current.value = e.target.value;
-        } else {
-            //setNomFiliere(nomFiliere, [value]: e)
-        }
+        const { value, id } = e.target;
+        setFormData({ ...formData, [id]: value });
+        console.log(id, value)
     }
 
     const editFiliere = () => {
@@ -89,7 +90,7 @@ function AddFiliere() {
                                     </h6><br />
                                     <div className='row'>
                                         <div className="col-sm-6">
-                                            <input id="text" type="text" value={state ? oneFil?.data?.nom : nomFiliere} className='form-control' onChange={(e) => changeValue()}
+                                            <input id="nom" type="text" value={formData.nom} className='form-control' onChange={changeValue}
                                                 placeholder="Entrer le nom de la filière" ref={valueInput} /> <br /><br />
                                         </div>
                                         <div className="col-sm-2">
