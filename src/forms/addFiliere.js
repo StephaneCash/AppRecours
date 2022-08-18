@@ -6,34 +6,27 @@ import swal from "sweetalert";
 
 function AddFiliere() {
 
-    const [nomFiliere, setNomFiliere] = useState("");
     const [clicAdd, setClickAdd] = useState(false);
-    const [id, setId] = useState(0);
-    const [oneFil, setOneFil] = useState([]);
 
     const initialiseValues = { id: "", nom: "" };
     const [formData, setFormData] = useState(initialiseValues);
 
     const navigate = useNavigate();
 
+    const { nom, id} = formData;
+
+    console.log(nom, id)
+
     const valueInput = useRef();
 
     const location = useLocation();
     const { state } = location;
 
-    const getOneUser = () => {
-        if (state) {
-            axios.get(`http://localhost:5000/api/filieres/${state.id}`).then(resp => {
-                setOneFil(resp.data);
-            }).catch((err => {
-                console.log(err)
-            }))
-        }
-    }
-
     useEffect(() => {
-        getOneUser();
-    }, [id]);
+        if (state) {
+            setFormData(state.val)
+        }
+    }, []);
 
     const changeValue = (e) => {
         const { value, id } = e.target;
@@ -42,7 +35,7 @@ function AddFiliere() {
     }
 
     const editFiliere = () => {
-        axios.put(`http://localhost:5000/api/filieres/${state.id}`, { nom: valueInput.current.value })
+        axios.put(`http://localhost:5000/api/filieres/${id}`, { nom: nom })
             .then(resp => {
                 swal({ title: 'Succès', icon: 'success', text: "Filière editée avec succès" });
                 navigate('/filieres');
@@ -54,14 +47,12 @@ function AddFiliere() {
     }
 
     const submitData = () => {
-        if (nomFiliere === "") {
+        if (nom === "") {
             alert("Veuillez entrer le nom d'une filière svp !");
         }
-        axios.post(`http://localhost:5000/api/filieres`, { nom: nomFiliere })
+        axios.post(`http://localhost:5000/api/filieres`, { nom: nom })
             .then(resp => {
                 console.log(resp);
-                const filiereInput = document.getElementById('text');
-                filiereInput.value = '';
                 setClickAdd(false);
                 navigate('/filieres');
                 swal({ title: "Succès", icon: 'success', text: 'Filière ajoutée avec succès' });
@@ -90,7 +81,7 @@ function AddFiliere() {
                                     </h6><br />
                                     <div className='row'>
                                         <div className="col-sm-6">
-                                            <input id="nom" type="text" value={formData.nom} className='form-control' onChange={changeValue}
+                                            <input id="nom" value={nom} type="text" className='form-control' onChange={changeValue}
                                                 placeholder="Entrer le nom de la filière" ref={valueInput} /> <br /><br />
                                         </div>
                                         <div className="col-sm-2">

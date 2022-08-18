@@ -77,7 +77,7 @@ function Filieres() {
                                             <tr>
                                                 <th>N°</th>
                                                 <th>Nom</th>
-                                                <th style={{ width: "240px" }}>Date de création</th>
+                                                <th style={{ width: '230px' }}>Date de création</th>
                                                 <th style={{ width: "200px" }}>Options</th>
                                             </tr>
                                         </thead>
@@ -95,7 +95,7 @@ function Filieres() {
                                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                                             }} onClick={() => deleteFiliere(val.id)}>Supprimer</button>
 
-                                                            <NavLink to={{ pathname: "add-filiere" }} state={{ id: val.id }}>
+                                                            <NavLink to={{ pathname: "add-filiere" }} state={{ val: val }}>
                                                                 <button style={{
                                                                     flex: '1', float: 'right', textAlign: 'right',
                                                                     padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
