@@ -59,7 +59,7 @@ function AddCours() {
                                             <label>Sélectionne un professeur</label>
                                             <select className="form-control mt-1" id="professeurId" onChange={changeValue}>
                                                 {profs.data ? profs.data.map((val, index) => {
-                                                    return <option key={index}>{val.nom}</option>
+                                                    return <option key={index} value={val.id}>{val.nom}</option>
                                                 }) : 'Aucune donnée.'}
                                             </select>
 
