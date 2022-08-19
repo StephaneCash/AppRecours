@@ -1,14 +1,37 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import SideBar from '../components/SideBar'
 
 function AddCours() {
 
-    const state = '';
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { state } = location;
 
-    const changeValue = (e) =>{
+    const initialiseValues = { id: "", nom: "", postnom: "" };
+    const [formData, setFormData] = useState(initialiseValues);
 
-    }
+    const [profs, setProfs] = useState([]);
+
+    const changeValue = (e) => {
+        const { value, id } = e.target;
+        setFormData({ ...formData, [id]: value });
+        console.log(id, value)
+    };
+
+    const getAllProfs = () => {
+        axios.get(`http://localhost:5000/api/profs`).then(resp => {
+            setProfs(resp.data);
+            console.log(resp.data);
+        }).catch(err => {
+            console.log(err)
+        });
+    };
+
+    useEffect(() => {
+        getAllProfs();
+    }, []);
 
     return (
         <div className='col-md-12'>
@@ -23,15 +46,25 @@ function AddCours() {
                                 <div className="col-sm-12">
                                     <label> {state ? "Editer " : "Ajouter"} une cours</label> <br /><br />
                                     <h6>
-                                        <NavLink to="/filieres"><i className='fa fa-angle-left'></i> Retour</NavLink>
+                                        <NavLink to="/cours"><i className='fa fa-angle-left'></i> Retour</NavLink>
                                     </h6><br />
                                     <div className='row'>
                                         <div className="col-sm-6">
                                             <label>Nom du cours</label>
-                                            <input type="text" className="form-control" id="nom" />
-                                        </div>
-                                        <div className="col-sm-2">
+                                            <input type="text" className="form-control mt-1" id="nom" onChange={changeValue} />
+
+                                            <label>Pondération</label>
+                                            <input type="number" className="form-control mt-1" id="ponderation" onChange={changeValue} />
+
+                                            <label>Sélectionne un professeur</label>
+                                            <select className="form-control mt-1" id="professeurId" onChange={changeValue}>
+                                                {profs.data ? profs.data.map((val, index) => {
+                                                    return <option key={index}>{val.nom}</option>
+                                                }) : 'Aucune donnée.'}
+                                            </select>
+
                                             <button type='button' style={{
+                                                marginTop: "10px",
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                             }}>
                                                 {state ? "Editer" : "Ajouter"}

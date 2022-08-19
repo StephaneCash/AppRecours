@@ -2,7 +2,7 @@ import React from "react";
 import "../css/SideBar.css";
 import { NavLink } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai"
-import { Book, MenuBook, Person, School, Work } from "@material-ui/icons"
+import { Book, Chat, MenuBook, Person, School,  } from "@material-ui/icons"
 import { Avatar } from "@material-ui/core";
 
 function SideBar() {
@@ -54,7 +54,7 @@ function SideBar() {
                     </li>
                     <li>
                         <NavLink to="/Communication">
-                            <Work className="icon"
+                            <Chat className="icon"
                                 style={{ marginRight: '10px', fontSize: '20px' }} />
                             <span className="textNavbar">Chat</span>
                         </NavLink>
