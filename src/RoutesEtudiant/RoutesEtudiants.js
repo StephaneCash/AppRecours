@@ -6,6 +6,8 @@ import Login from "../pages/Login";
 import Recours from '../pages/Recours';
 import AddFiliere from "../forms/AddFiliere";
 import Filieres from "../pages/Filieres";
+import Prof from '../pages/Prof';
+import AddProf from '../forms/AddProf';
 
 function RoutesEtudiants() {
   return (
@@ -18,6 +20,8 @@ function RoutesEtudiants() {
         <Route path='/recours' element={<Recours />} />
         <Route path='/filieres' element={<Filieres />} />
         <Route path="/filieres/add-filiere" element={<AddFiliere />} />
+        <Route path="/professeurs" element={<Prof />} />
+        <Route path="/professeurs/add-prof" element={<AddProf />} />
       </Routes>
     </BrowserRouter>
   )

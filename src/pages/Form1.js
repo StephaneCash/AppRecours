@@ -129,6 +129,7 @@ function Form1() {
                             value={userData['promotionj']}
                             onChange={(e) => (setUserData({ ...userData, 'promotion': e.target.value }), handlePromotion(e))}
                         >
+                            <option>--Filière--</option>
                             {
                                 filiere.data ? filiere.data.map((val, index) => {
                                     return (

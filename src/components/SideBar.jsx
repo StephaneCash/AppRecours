@@ -2,7 +2,7 @@ import React from "react";
 import "../css/SideBar.css";
 import { NavLink } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai"
-import { Book, MenuBook, School, Work } from "@material-ui/icons"
+import { Book, MenuBook, Person, School, Work } from "@material-ui/icons"
 import { Avatar } from "@material-ui/core";
 
 function SideBar() {
@@ -35,7 +35,7 @@ function SideBar() {
                         <NavLink to="/se_plaindre">
                             <School className="icon"
                                 style={{ marginRight: '10px', fontSize: '20px' }} />
-                            <span className="textNavbar">Se plaindre</span>
+                            <span className="textNavbar">Cours</span>
                         </NavLink>
                     </li>
                     <li>
@@ -50,6 +50,13 @@ function SideBar() {
                             <MenuBook className="icon"
                                 style={{ marginRight: '10px', fontSize: '20px' }} />
                             <span className="textNavbar">Filières</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/professeurs">
+                            <Person className="icon"
+                                style={{ marginRight: '10px', fontSize: '20px' }} />
+                            <span className="textNavbar">Professeurs</span>
                         </NavLink>
                     </li>
                 </ul>

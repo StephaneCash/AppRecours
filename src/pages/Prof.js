@@ -1,39 +1,40 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import SideBar from '../components/SideBar';
-import { NavLink } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-function Filieres() {
+function Prof() {
 
-    const [dataFilieres, setDataFilieres] = useState([]);
+    const [profs, setProfs] = useState([]);
 
-    const getAllFilieres = () => {
-        axios.get('http://localhost:5000/api/filieres').then(resp => {
-            setDataFilieres(resp.data);
-        }).catch(err => {
-            console.log(err);
-        })
+    const getAllProfs = () => {
+        axios.get(`http://localhost:5000/api/profs`)
+            .then(resp => {
+                setProfs(resp.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     useEffect(() => {
-        getAllFilieres();
+        getAllProfs();
     }, []);
 
-    const deleteFiliere = (id) => {
+    const deleteProf = (id) => {
         swal({
             title: "Avertissement.",
-            text: "Etes-vous sûr de vouloir supprimer cette filière ?",
+            text: "Etes-vous sûr de vouloir supprimer ce prof ?",
             icon: "warning",
             buttons: true,
             dangerMode: true
         }).then((willDelete) => {
             if (willDelete) {
-                axios.delete(`http://localhost:5000/api/filieres/${id}`)
+                axios.delete(`http://localhost:5000/api/profs/${id}`)
                     .then(resp => {
-                        getAllFilieres();
-                        console.log(resp.data);
-                        swal('Filière supprimée avec succès', {
+                        getAllProfs();
+                        swal('Prof supprimé avec succès', {
                             icon: "success",
                         });
                     })
@@ -44,8 +45,8 @@ function Filieres() {
             }
         }).catch((error) => {
             console.log(error);
-        })
-    }
+        });
+    };
 
     return (
         <div className='col-md-12'>
@@ -57,17 +58,16 @@ function Filieres() {
                     <div className='mainRecours container'>
                         <main>
                             <section className="recent">
-                                <h4>Liste de filières</h4>
-
+                                <h4>Liste de professeurs</h4>
                                 <div className='d-flex'>
-                                    <div className="col-2">Filière</div>
+                                    <div className="col-2">Professeur</div>
 
                                     <div className='col-10'>
-                                        <NavLink to='add-filiere' style={{ textAlign: 'right' }}>
+                                        <NavLink to='add-prof' style={{ textAlign: 'right' }}>
                                             <button style={{
                                                 flex: '1', float: 'right', textAlign: 'right', marginBottom: '10px',
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                            }} >Ajouter une filière</button>
+                                            }} >Ajouter un prof</button>
                                         </NavLink>
                                     </div>
                                 </div>
@@ -77,29 +77,34 @@ function Filieres() {
                                             <tr>
                                                 <th>N°</th>
                                                 <th>Nom</th>
+                                                <th>Postnom</th>
+                                                <th>Cours</th>
                                                 <th style={{ width: '230px' }}>Date de création</th>
                                                 <th style={{ width: '230px' }}>Date de modification</th>
                                                 <th style={{ width: "200px" }}>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {dataFilieres.data ?
-                                                dataFilieres.taille >= 1 ?
-                                                    dataFilieres.data.map((val, index) => {
+                                            {profs.data ?
+                                                profs.taille >= 1 ?
+                                                    profs.data.map((val, index) => {
                                                         return (
-                                                            <tr>
+                                                            <tr key={index}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{val.nom}</td>
+                                                                <td>{val.postnom}</td>
+                                                                <td></td>
                                                                 <td>Le {val.createdAt.substring(0, 10)}, à {val.createdAt.substring(11, 20)}</td>
                                                                 <td>Le {val.updatedAt.substring(0, 10)}, à {val.updatedAt.substring(11, 20)}</td>
+
                                                                 <td>
 
                                                                     <button style={{
                                                                         flex: '1', float: 'right', textAlign: 'right', marginLeft: '5px',
                                                                         padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                                                    }} onClick={() => deleteFiliere(val.id)}>Supprimer</button>
+                                                                    }} onClick={() => deleteProf(val.id)}>Supprimer</button>
 
-                                                                    <NavLink to={{ pathname: "add-filiere" }} state={{ val: val }}>
+                                                                    <NavLink to={{ pathname: "add-prof" }} state={{ val: val }}>
                                                                         <button style={{
                                                                             flex: '1', float: 'right', textAlign: 'right',
                                                                             padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
@@ -111,11 +116,10 @@ function Filieres() {
                                                     })
                                                     :
                                                     <tr>
-                                                        <td colSpan='5px' className='text-center'>Aucune donnée enregistrée.</td>
-                                                    </tr>
-                                                :
+                                                        <td colSpan='7px' className='text-center'>Aucune donnée enregistrée.</td>
+                                                    </tr> :
                                                 <tr>
-                                                    <td colSpan='5px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
+                                                    <td colSpan='7px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
                                                 </tr>
                                             }
                                         </tbody>
@@ -130,4 +134,4 @@ function Filieres() {
     )
 }
 
-export default Filieres
+export default Prof
