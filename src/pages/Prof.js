@@ -81,7 +81,7 @@ function Prof() {
                                                 <th>Cours</th>
                                                 <th style={{ width: '230px' }}>Date de création</th>
                                                 <th style={{ width: '230px' }}>Date de modification</th>
-                                                <th style={{ width: "200px" }}>Options</th>
+                                                <th style={{ width: "320px" }}>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -98,6 +98,12 @@ function Prof() {
                                                                 <td>Le {val.updatedAt.substring(0, 10)}, à {val.updatedAt.substring(11, 20)}</td>
 
                                                                 <td>
+                                                                    <NavLink to={{ pathname: "attribution-cours" }} state={{ val: val }}>
+                                                                        <button style={{
+                                                                            flex: '1', float: 'right', textAlign: 'right', marginLeft: '5px',
+                                                                            padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
+                                                                        }} onClick={() => (val)}>Attribuer de cours</button>
+                                                                    </NavLink>
 
                                                                     <button style={{
                                                                         flex: '1', float: 'right', textAlign: 'right', marginLeft: '5px',

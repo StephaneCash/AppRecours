@@ -10,6 +10,7 @@ import Prof from '../pages/Prof';
 import AddProf from '../forms/AddProf';
 import Cours from '../pages/Cours';
 import AddCours from '../forms/AddCours';
+import AttributesCours from '../forms/AttributesCours';
 
 function RoutesEtudiants() {
   return (
@@ -26,6 +27,7 @@ function RoutesEtudiants() {
         <Route path="/professeurs/add-prof" element={<AddProf />} />
         <Route path='/cours' element={<Cours />} />
         <Route path="/cours/add-cours" element={<AddCours />} />
+        <Route path="/professeurs/attribution-cours" element={<AttributesCours />} />
       </Routes>
     </BrowserRouter>
   )

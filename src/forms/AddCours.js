@@ -33,6 +33,10 @@ function AddCours() {
         getAllProfs();
     }, []);
 
+    const submitData = () => {
+        
+    }
+
     return (
         <div className='col-md-12'>
             <div className='d-flex'>
@@ -66,7 +70,7 @@ function AddCours() {
                                             <button type='button' style={{
                                                 marginTop: "10px",
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                            }}>
+                                            }} onClick={submitData}>
                                                 {state ? "Editer" : "Ajouter"}
                                             </button>
                                         </div>
