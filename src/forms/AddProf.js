@@ -69,9 +69,9 @@ function AddProf() {
                                     <div className='row'>
                                         <div className="col-sm-6">
                                             <label>Nom du professeur</label>
-                                            <input id="nom" type="text" value={nom} className="form-control mt-1" onChange={changeValue} />
+                                            <input id="nom" type="text" value={nom} placeholder="Entrer le nom d'un professeur" className="form-control mt-1" onChange={changeValue} />
                                             <label className='mt-1'>Postnom</label>
-                                            <input id="postnom" type="text" value={postnom} className='form-control' onChange={changeValue} />
+                                            <input id="postnom" type="text" value={postnom} placeholder="Entre un postnom" className='form-control' onChange={changeValue} />
                                             <button type='button' style={{
                                                 marginTop: '10px',
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'

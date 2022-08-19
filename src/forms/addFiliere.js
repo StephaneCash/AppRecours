@@ -61,7 +61,7 @@ function AddFiliere() {
                 console.log(err);
                 setClickAdd(false);
                 swal({ title: "Echec", icon: 'error', text: 'Filière non ajoutée' });
-            })
+            });
     }
 
     return (

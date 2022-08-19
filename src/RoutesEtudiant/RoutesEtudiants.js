@@ -8,6 +8,8 @@ import AddFiliere from "../forms/AddFiliere";
 import Filieres from "../pages/Filieres";
 import Prof from '../pages/Prof';
 import AddProf from '../forms/AddProf';
+import Cours from '../pages/Cours';
+import AddCours from '../forms/AddCours';
 
 function RoutesEtudiants() {
   return (
@@ -22,6 +24,8 @@ function RoutesEtudiants() {
         <Route path="/filieres/add-filiere" element={<AddFiliere />} />
         <Route path="/professeurs" element={<Prof />} />
         <Route path="/professeurs/add-prof" element={<AddProf />} />
+        <Route path='/cours' element={<Cours />} />
+        <Route path="/cours/add-cours" element={<AddCours />} />
       </Routes>
     </BrowserRouter>
   )

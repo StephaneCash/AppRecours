@@ -32,17 +32,10 @@ function SideBar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/se_plaindre">
+                        <NavLink to="/cours">
                             <School className="icon"
                                 style={{ marginRight: '10px', fontSize: '20px' }} />
                             <span className="textNavbar">Cours</span>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/Communication">
-                            <Work className="icon"
-                                style={{ marginRight: '10px', fontSize: '20px' }} />
-                            <span className="textNavbar">Communication</span>
                         </NavLink>
                     </li>
                     <li>
@@ -57,6 +50,13 @@ function SideBar() {
                             <Person className="icon"
                                 style={{ marginRight: '10px', fontSize: '20px' }} />
                             <span className="textNavbar">Professeurs</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/Communication">
+                            <Work className="icon"
+                                style={{ marginRight: '10px', fontSize: '20px' }} />
+                            <span className="textNavbar">Chat</span>
                         </NavLink>
                     </li>
                 </ul>
