@@ -165,7 +165,7 @@ function Form2() {
                             {
                                 click === true && (
                                     <>
-                                        {isValidCours === false ? <div className="sexeObligatoire mt-1">Veuillez choisir le nom du cours svp !</div> : ""}
+                                        {isValidCours === false ? <div className="mt-1">Veuillez choisir le nom du cours svp !</div> : ""}
                                     </>
                                 )
                             }
