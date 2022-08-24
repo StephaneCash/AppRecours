@@ -12,6 +12,7 @@ function AttributesCours() {
 
     const [formData, setFormData] = useState({});
     const [cours, setCours] = useState([]);
+    const [coursAttribues, setCoursAttribues] = useState([]);
 
     const { id, nom, postnom } = formData;
 
@@ -29,15 +30,14 @@ function AttributesCours() {
 
     const attributionFunction = (val) => {
         const idCours = val.id;
-        tabNames.push(val.nom);
+        setCoursAttribues([...coursAttribues, val.nom])
         axios.put(`http://localhost:5000/api/cours/${idCours}`, { professeurId: id })
             .then(resp => {
-                /* swal({
-                     title: "Succès",
-                     icon: "success",
-                     text: resp.data.message
-                 });*/
-                //navigate('/professeurs');
+                swal({
+                    title: "Succès",
+                    icon: "success",
+                    text: "Cours attribué avec succès"
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -49,25 +49,18 @@ function AttributesCours() {
             });
     };
 
-    function fetchTabNamesAttr() {
-        tabNames.map((val, index) => {
-            return (
-                <span>{val} {index}</span>
-            )
-        });
-    }
-
     useEffect(() => {
         if (state) {
             setFormData(state.val)
         }
         getAllCours();
-        fetchTabNamesAttr();
     }, []);
 
     const styleBtn = {
-        border: "1px solid silver", padding: '6px', borderRadius: "4px", boxShadow: "1px 1px 10px silver", marginRight: "5px"
+        border: "1px solid silver", padding: '6px', borderRadius: "4px", boxShadow: "1px 1px 10px silver", marginRight: "5px",
+        marginBottom: '5px'
     };
+    const styleCoursAtt = { marginRight: '10px', marginTop: "0px" }
 
     return (
         <div className='col-md-12'>
@@ -86,13 +79,15 @@ function AttributesCours() {
                                     </h6><br />
                                     <div className='row'>
 
-                                        <div className="col-sm-6">
+                                        <div className="col-sm-10">
                                             <div className="alert alert-success">
                                                 Professeur :   {nom + " " + postnom}
                                             </div>
                                             <div className="alert alert-danger mt-2">
-                                                Cours attribués :   {
-                                                    fetchTabNamesAttr()
+                                                Cours attribués :  <br />  {
+                                                    coursAttribues && coursAttribues.map((val, index) => {
+                                                        return <button className='alert alert-success' style={styleCoursAtt} key={index}>{val}</button>
+                                                    })
                                                 }
                                             </div>
                                         </div>
@@ -107,13 +102,6 @@ function AttributesCours() {
                                             }
                                         </div>
 
-                                        <div className="col-sm-3 mt-3">
-                                            <button type='button' style={{
-                                                padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                            }}>
-                                                Attributer
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </section>
