@@ -84,10 +84,11 @@ function AttributesCours() {
                                                 Professeur :   {nom + " " + postnom}
                                             </div>
                                             <div className="alert alert-danger mt-2">
-                                                Cours attribués :  <br />  {
-                                                    coursAttribues && coursAttribues.map((val, index) => {
+                                                Cours attribués :  <br />
+                                                {
+                                                    coursAttribues.length > 0 ? coursAttribues.map((val, index) => {
                                                         return <button className='alert alert-success' style={styleCoursAtt} key={index}>{val}</button>
-                                                    })
+                                                    }) : "Aucun cours attribué"
                                                 }
                                             </div>
                                         </div>
