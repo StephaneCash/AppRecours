@@ -16,8 +16,6 @@ function AttributesCours() {
 
     const { id, nom, postnom } = formData;
 
-    let tabNames = []
-
     const getAllCours = () => {
         axios.get(`http://localhost:5000/api/cours`)
             .then(resp => {
@@ -28,9 +26,11 @@ function AttributesCours() {
             });
     };
 
+
     const attributionFunction = (val) => {
         const idCours = val.id;
-        setCoursAttribues([...coursAttribues, val.nom])
+        setCoursAttribues([...coursAttribues, val.nom]);
+
         axios.put(`http://localhost:5000/api/cours/${idCours}`, { professeurId: id })
             .then(resp => {
                 swal({
@@ -88,7 +88,7 @@ function AttributesCours() {
                                                 {
                                                     coursAttribues.length > 0 ? coursAttribues.map((val, index) => {
                                                         return <button className='alert alert-success' style={styleCoursAtt} key={index}>{val}</button>
-                                                    }) : "Aucun cours attribué"
+                                                    }) : <span style={{ fontWeight: "bold" }}>Aucun cours attribué.</span>
                                                 }
                                             </div>
                                         </div>
