@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import axios from "axios";
 import swal from "sweetalert";
+import { valueAbsolute } from 'fontawesome';
 
 function Prof() {
 
@@ -47,6 +48,8 @@ function Prof() {
             console.log(error);
         });
     };
+
+    const tdStyle = { border: "1px solid silver", padding: '3px' }
 
     return (
         <div className='col-md-12'>
@@ -93,7 +96,20 @@ function Prof() {
                                                                 <td>{index + 1}</td>
                                                                 <td>{val.nom}</td>
                                                                 <td>{val.postnom}</td>
-                                                                <td></td>
+                                                                <td>
+                                                                    {
+                                                                        val.cours ?
+                                                                            val.cours.length ? val.cours.map((cours, i) => {
+                                                                                return (
+                                                                                    <tr index={i}>
+                                                                                        <td style={tdStyle}>{cours.nom}</td>
+                                                                                    </tr>
+                                                                                )
+
+                                                                            }) : "Aucun cours attribué."
+                                                                            : "Il existe aucun cours."
+                                                                    }
+                                                                </td>
                                                                 <td>Le {val.createdAt.substring(0, 10)}, à {val.createdAt.substring(11, 20)}</td>
                                                                 <td>Le {val.updatedAt.substring(0, 10)}, à {val.updatedAt.substring(11, 20)}</td>
 

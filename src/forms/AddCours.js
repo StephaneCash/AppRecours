@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
-import SideBar from '../components/SideBar'
+import SideBar from '../components/SideBar';
+import swal from "sweetalert";
 
 function AddCours() {
 
@@ -17,13 +18,11 @@ function AddCours() {
     const changeValue = (e) => {
         const { value, id } = e.target;
         setFormData({ ...formData, [id]: value });
-        console.log(id, value)
     };
 
     const getAllProfs = () => {
         axios.get(`http://localhost:5000/api/profs`).then(resp => {
             setProfs(resp.data);
-            console.log(resp.data);
         }).catch(err => {
             console.log(err)
         });
@@ -34,8 +33,16 @@ function AddCours() {
     }, []);
 
     const submitData = () => {
-        
-    }
+        axios.post(`http://localhost:5000/api/cours`, { nom: formData.nom, ponderation: formData.ponderation, professeurId: formData.professeurId })
+            .then(resp => {
+                swal({ title: "Succès", icon: "success", text: resp.data.msg });
+                navigate('/cours');
+            })
+            .catch(err => {
+                console.log(err);
+                swal({ title: "Echec", icon: "error", text: "Pas d'enregistrement" });
+            })
+    };
 
     return (
         <div className='col-md-12'>

@@ -44,7 +44,7 @@ function Filieres() {
             }
         }).catch((error) => {
             console.log(error);
-        })
+        });
     }
 
     return (
@@ -60,7 +60,7 @@ function Filieres() {
                                 <h4>Liste de filières</h4>
 
                                 <div className='d-flex'>
-                                    <div className="col-2">Filière</div>
+                                    <div className="col-2">{dataFilieres.taille && dataFilieres.taille} {dataFilieres.taille <= 1 ? 'Filière' : "Filières"}</div>
 
                                     <div className='col-10'>
                                         <NavLink to='add-filiere' style={{ textAlign: 'right' }}>

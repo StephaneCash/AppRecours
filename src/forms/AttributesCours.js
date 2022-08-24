@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import SideBar from '../components/SideBar';
 import axios from "axios";
+import swal from "sweetalert";
 
 function AttributesCours() {
 
@@ -10,10 +11,11 @@ function AttributesCours() {
     const { state } = location;
 
     const [formData, setFormData] = useState({});
-
     const [cours, setCours] = useState([]);
 
     const { id, nom, postnom } = formData;
+
+    let tabNames = []
 
     const getAllCours = () => {
         axios.get(`http://localhost:5000/api/cours`)
@@ -26,13 +28,33 @@ function AttributesCours() {
     };
 
     const attributionFunction = (val) => {
-        axios.put(`http://localhost:5000/api/cours/${val}`, { professeurId: id })
+        const idCours = val.id;
+        tabNames.push(val.nom);
+        axios.put(`http://localhost:5000/api/cours/${idCours}`, { professeurId: id })
             .then(resp => {
-                console.log(resp.data);
+                /* swal({
+                     title: "Succès",
+                     icon: "success",
+                     text: resp.data.message
+                 });*/
+                //navigate('/professeurs');
             })
             .catch(err => {
                 console.log(err);
+                swal({
+                    title: "Echec",
+                    icon: "error",
+                    text: "Aucun cours n'a été attribué"
+                });
             });
+    };
+
+    function fetchTabNamesAttr() {
+        tabNames.map((val, index) => {
+            return (
+                <span>{val} {index}</span>
+            )
+        });
     }
 
     useEffect(() => {
@@ -40,6 +62,7 @@ function AttributesCours() {
             setFormData(state.val)
         }
         getAllCours();
+        fetchTabNamesAttr();
     }, []);
 
     const styleBtn = {
@@ -67,13 +90,18 @@ function AttributesCours() {
                                             <div className="alert alert-success">
                                                 Professeur :   {nom + " " + postnom}
                                             </div>
+                                            <div className="alert alert-danger mt-2">
+                                                Cours attribués :   {
+                                                    fetchTabNamesAttr()
+                                                }
+                                            </div>
                                         </div>
 
                                         <div className="col-sm-12">
                                             <p>Cliquer sur un cours pour lui attribuer à un professeur</p>
                                             {
                                                 cours.data ? cours.data.map((val, index) => {
-                                                    return <button style={styleBtn} key={index} onClick={() => attributionFunction(val.id)}>
+                                                    return <button style={styleBtn} key={index} onClick={() => attributionFunction(val)}>
                                                         <i className="fa fa-plus"></i> {val.nom}</button>
                                                 }) : 'Aucun cours trouvé.'
                                             }
