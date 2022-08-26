@@ -11,6 +11,8 @@ function ReceivedDataForm() {
 
     let navigate = useNavigate();
 
+    console.log(userData)
+
     useEffect(() => {
         axios.post(`http://localhost:5000/api/recours`, {
             nomEtudiant: userData.nom, postnomEtudiant: userData.postnom, promotion: userData.promotion,
@@ -20,14 +22,24 @@ function ReceivedDataForm() {
             if (resp.status === 201) {
                 swal({ title: "Succès", icon: "success", text: resp.data.message });
                 navigate("/recours");
+                setUserData({ nom: "", postnom: "", promotion: "", objetRecours: "", coteAnnee: "", coteExamen: "", nomProf: "", cours: "" })
             } else {
+                navigate("/recours/addRecours");
+                setCurrentStep(1);
                 swal({ title: "Echec", icon: "error", text: "Pas de recours créé, vous serez redirectionné pour recommencer merci." });
             }
         }).catch(err => {
+            navigate("/recours/addRecours");
+            setCurrentStep(1);
             console.log(err);
-            swal({ title: "Echec", icon: "error", text: "Pas de recours créé, vous serez redirectionné pour recommencer merci." });
         })
-    }, [data])
+    }, [data]);
+
+    useEffect(() => {
+        if (!userData) {
+            navigate("/recours/addRecours");
+        }
+    }, [userData])
 
     return (
         <div className='col-md-12 container'>

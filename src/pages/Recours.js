@@ -75,13 +75,13 @@ function Recours() {
                                                 <thead>
                                                     <tr>
                                                         <th>N°</th>
-                                                        <th>Nom complet Etudiant </th>
+                                                        <th>Nom Etudiant </th>
                                                         <th>Promotion</th>
                                                         <th>Object Recours</th>
                                                         <th>Cours</th>
                                                         <th>Professeur</th>
-                                                        <th>Statut</th>
-                                                        <th>Actions</th>
+                                                        <th style={{ width: '130px' }}>Statut</th>
+                                                        <th style={{ width: '160px' }}>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -97,7 +97,7 @@ function Recours() {
                                                                         <td>{val.cours}</td>
                                                                         <td>{val.nomCompletProf}</td>
                                                                         <td>
-                                                                            {val.statut === 0 ? 'En cours' : "Répondu"}
+                                                                            {val.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> : "Répondu"}
                                                                         </td>
                                                                         <td>
                                                                             <button style={{
