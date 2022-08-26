@@ -82,7 +82,7 @@ function AttributesCours() {
                                                 Professeur :   {nom + " " + postnom} <br />
                                                 Cours déjà attribués : {state.val.cours.length > 0 ? state.val.cours.map((val, index) => {
                                                     return <button className='alert alert-success' style={styleCoursAtt} key={index}>{val.nom}</button>
-                                                }) : "Aucun déjà attrbué."}
+                                                }) : "Aucun cours déjà attrbué."}
                                             </div>
                                             <div className="alert alert-danger mt-2">
                                                 Cours attribués :  <br />
