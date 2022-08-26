@@ -63,7 +63,7 @@ function Prof() {
                             <section className="recent">
                                 <h4>Liste de professeurs</h4>
                                 <div className='d-flex'>
-                                    <div className="col-2">Professeur</div>
+                                    <div className="col-2">{profs.taille > 1 ? profs.taille + " Professeurs" : profs.taille + ' Professeur'}</div>
 
                                     <div className='col-10'>
                                         <NavLink to='add-prof' style={{ textAlign: 'right' }}>
