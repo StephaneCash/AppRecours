@@ -123,11 +123,11 @@ function Recours() {
                                                             })
                                                             :
                                                             <tr>
-                                                                <td colSpan='8px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
+                                                                <td colSpan='8px' className='text-center'>Aucune donnée enregistrée.</td>
                                                             </tr>
                                                         :
                                                         <tr>
-                                                            <td colSpan='8px' className='text-center'>Aucune donnée enregistrée.</td>
+                                                            <td colSpan='8px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
                                                         </tr>
                                                     }
                                                 </tbody>

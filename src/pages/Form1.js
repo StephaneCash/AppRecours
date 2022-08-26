@@ -24,7 +24,7 @@ function Form1() {
     };
 
     const handlePromotion = (e) => {
-        if (e.target.value === "--Promotion--") {
+        if (e.target.value === "--Filière--") {
             setisValidPromotion(false);
         } else {
             setisValidPromotion(true);
@@ -131,11 +131,11 @@ function Form1() {
                         >
                             <option>--Filière--</option>
                             {
-                                filiere.data ? filiere.data.map((val, index) => {
+                                filiere.data && filiere.data.map((val, index) => {
                                     return (
-                                        <option>{val.nom}</option>
+                                        <option key={index}>{val.nom} {val.niveau}</option>
                                     )
-                                }) : <option>Pas de données.</option>
+                                })
                             }
                         </select>
                         {
