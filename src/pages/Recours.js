@@ -19,8 +19,14 @@ function Recours() {
     };
 
     useEffect(() => {
-        getAllRecours()
+        getAllRecours();
     }, []);
+
+    useEffect(() => {
+        if (recours.taille === 0) {
+            getAllRecours()
+        }
+    }, [recours]);
 
     const deleteRecours = (id) => {
         swal({
@@ -62,7 +68,7 @@ function Recours() {
                                     <div className="card">
                                         <div className='card-header'>
                                             <div className='d-flex'>
-                                                <div className="col-2">Recours</div>
+                                                <div className="col-2"> {recours.taille && recours.taille} Recours</div>
                                                 <div className='col-10'>
                                                     <NavLink to='addRecours' style={{ textAlign: 'right' }}>
                                                         <button style={{ flex: '1', float: 'right', textAlign: 'right', padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a' }}>Créer un recours</button>
@@ -89,7 +95,7 @@ function Recours() {
                                                         recours.taille >= 1 ?
                                                             recours.data.map((val, index) => {
                                                                 return (
-                                                                    <tr>
+                                                                    <tr key={index}>
                                                                         <td>{index + 1}</td>
                                                                         <td>{val.nomEtudiant} {val.postnomEtudiant}</td>
                                                                         <td>{val.promotion}</td>
@@ -117,11 +123,11 @@ function Recours() {
                                                             })
                                                             :
                                                             <tr>
-                                                                <td colSpan='8px' className='text-center'>Aucune donnée enregistrée.</td>
+                                                                <td colSpan='8px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
                                                             </tr>
                                                         :
                                                         <tr>
-                                                            <td colSpan='8px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
+                                                            <td colSpan='8px' className='text-center'>Aucune donnée enregistrée.</td>
                                                         </tr>
                                                     }
                                                 </tbody>
