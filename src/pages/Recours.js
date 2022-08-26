@@ -22,7 +22,29 @@ function Recours() {
     }, []);
 
     const deleteRecours = (id) => {
-        alert('Voulez-vous supprimer ce recours ?')
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer ce recours ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                axios.delete(`http://localhost:5000/api/recours/${id}`)
+                    .then(resp => {
+                        getAllFilieres();
+                        console.log(resp.data);
+                        swal(resp.data.message, {
+                            icon: "success",
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     return (
@@ -87,7 +109,7 @@ function Recours() {
                                                                                 <button style={{
                                                                                     flex: '1', float: 'right', textAlign: 'right',
                                                                                     padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                                                                }}>Modifier</button>
+                                                                                }}>Détail</button>
                                                                             </NavLink>
                                                                         </td>
                                                                     </tr>
