@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import axios from "axios";
+import swal from "sweetalert"
 
 function Recours() {
 
@@ -32,8 +33,7 @@ function Recours() {
             if (willDelete) {
                 axios.delete(`http://localhost:5000/api/recours/${id}`)
                     .then(resp => {
-                        getAllFilieres();
-                        console.log(resp.data);
+                        getAllRecours();
                         swal(resp.data.message, {
                             icon: "success",
                         });
@@ -117,11 +117,11 @@ function Recours() {
                                                             })
                                                             :
                                                             <tr>
-                                                                <td colSpan='5px' className='text-center'>Aucune donnée enregistrée.</td>
+                                                                <td colSpan='8px' className='text-center'>Aucune donnée enregistrée.</td>
                                                             </tr>
                                                         :
                                                         <tr>
-                                                            <td colSpan='5px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
+                                                            <td colSpan='8px' className='text-center'><i className='fa fa-spinner fa-spin fa-2x'></i></td>
                                                         </tr>
                                                     }
                                                 </tbody>
