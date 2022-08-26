@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import axios from "axios";
 import swal from "sweetalert";
-import { valueAbsolute } from 'fontawesome';
 
 function Prof() {
 
@@ -16,7 +15,7 @@ function Prof() {
             })
             .catch(err => {
                 console.log(err)
-            })
+            });
     };
 
     useEffect(() => {
@@ -41,8 +40,7 @@ function Prof() {
                     })
                     .catch(err => {
                         console.log(err);
-                    })
-
+                    });
             }
         }).catch((error) => {
             console.log(error);
