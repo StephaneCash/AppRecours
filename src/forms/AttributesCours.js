@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import SideBar from '../components/SideBar';
 import axios from "axios";
 import swal from "sweetalert";
 
 function AttributesCours() {
 
-    const navigate = useNavigate();
     const location = useLocation();
     const { state } = location;
 
@@ -25,6 +24,8 @@ function AttributesCours() {
                 console.log(err);
             });
     };
+
+    console.log(state)
 
 
     const attributionFunction = (val) => {
@@ -81,7 +82,10 @@ function AttributesCours() {
 
                                         <div className="col-sm-10">
                                             <div className="alert alert-success">
-                                                Professeur :   {nom + " " + postnom}
+                                                Professeur :   {nom + " " + postnom} <br />
+                                                Cours déjà attribués : {state ? state.val.cours.map((val, index) => {
+                                                    return val.nom;
+                                                }) : "Aucun déjà attrbué."}
                                             </div>
                                             <div className="alert alert-danger mt-2">
                                                 Cours attribués :  <br />
