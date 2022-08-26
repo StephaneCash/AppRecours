@@ -25,9 +25,6 @@ function AttributesCours() {
             });
     };
 
-    console.log(state)
-
-
     const attributionFunction = (val) => {
         const idCours = val.id;
         setCoursAttribues([...coursAttribues, val.nom]);
