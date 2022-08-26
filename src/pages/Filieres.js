@@ -77,6 +77,7 @@ function Filieres() {
                                             <tr>
                                                 <th>N°</th>
                                                 <th>Nom</th>
+                                                <th>Niveau</th>
                                                 <th style={{ width: '230px' }}>Date de création</th>
                                                 <th style={{ width: '230px' }}>Date de modification</th>
                                                 <th style={{ width: "200px" }}>Options</th>
@@ -90,6 +91,7 @@ function Filieres() {
                                                             <tr>
                                                                 <td>{index + 1}</td>
                                                                 <td>{val.nom}</td>
+                                                                <td>{val.niveau}</td>
                                                                 <td>Le {val.createdAt.substring(0, 10)}, à {val.createdAt.substring(11, 20)}</td>
                                                                 <td>Le {val.updatedAt.substring(0, 10)}, à {val.updatedAt.substring(11, 20)}</td>
                                                                 <td>

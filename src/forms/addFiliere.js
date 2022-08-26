@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideBar from '../components/SideBar';
 import axios from "axios";
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
@@ -8,16 +8,12 @@ function AddFiliere() {
 
     const [clicAdd, setClickAdd] = useState(false);
 
-    const initialiseValues = { id: "", nom: "" };
+    const initialiseValues = { id: "", nom: "", niveau: '' };
     const [formData, setFormData] = useState(initialiseValues);
 
     const navigate = useNavigate();
 
-    const { nom, id} = formData;
-
-    console.log(nom, id)
-
-    const valueInput = useRef();
+    const { nom, id, niveau } = formData;
 
     const location = useLocation();
     const { state } = location;
@@ -35,7 +31,7 @@ function AddFiliere() {
     }
 
     const editFiliere = () => {
-        axios.put(`http://localhost:5000/api/filieres/${id}`, { nom: nom })
+        axios.put(`http://localhost:5000/api/filieres/${id}`, { nom: nom, niveau: niveau })
             .then(resp => {
                 swal({ title: 'Succès', icon: 'success', text: "Filière editée avec succès" });
                 navigate('/filieres');
@@ -50,7 +46,7 @@ function AddFiliere() {
         if (nom === "") {
             alert("Veuillez entrer le nom d'une filière svp !");
         }
-        axios.post(`http://localhost:5000/api/filieres`, { nom: nom })
+        axios.post(`http://localhost:5000/api/filieres`, { nom: nom, niveau: niveau })
             .then(resp => {
                 console.log(resp);
                 setClickAdd(false);
@@ -79,11 +75,17 @@ function AddFiliere() {
                                     <h6>
                                         <NavLink to="/filieres"><i className='fa fa-angle-left'></i> Retour</NavLink>
                                     </h6><br />
+                                    <div className="col-sm-6">
+                                        <input id="nom" value={nom} type="text" className='form-control' onChange={changeValue}
+                                            placeholder="Entrer le nom de la filière" /> <br />
+                                    </div>
+                                    
+                                    <div className="col-sm-6">
+                                        <input id="niveau" value={niveau} type="text" className='form-control' onChange={changeValue}
+                                            placeholder="Entrer le niveau par ex L1, L2, G1..." /> <br /><br />
+                                    </div>
+
                                     <div className='row'>
-                                        <div className="col-sm-6">
-                                            <input id="nom" value={nom} type="text" className='form-control' onChange={changeValue}
-                                                placeholder="Entrer le nom de la filière" ref={valueInput} /> <br /><br />
-                                        </div>
                                         <div className="col-sm-2">
 
                                             <button type='button' style={{
