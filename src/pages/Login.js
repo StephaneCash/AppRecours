@@ -56,8 +56,8 @@ function Login() {
                 </div>
                 <div className='card-body'>
                     <div className='mb-3'>
-                        <label className='mb-1'>Entrer votre username ou votre email</label>
-                        <input type="text" className='form-control' placeholder='Email ou Username' onChange={(e) => (handleEmail, setEmail(e.target.value))} />
+                        <label className='mb-1 text-dark'>Entrer votre username ou votre email</label>
+                        <input type="email" className='form-control' placeholder='Email ou Username' onChange={(e) => (handleEmail, setEmail(e.target.value))} required />
                         <span>
                             {
                                 btnState && isValidEmail ? <span className='text-danger'>Veuillez entrer une adresse email svp.</span> : ""
@@ -66,7 +66,7 @@ function Login() {
                     </div>
 
                     <div className='mt-3'>
-                        <label className='mb-1'>Entrer votre mot de passe</label>
+                        <label className='mb-1 text-dark' >Entrer votre mot de passe</label>
                         <input type="password" className='form-control' placeholder='Password' onChange={handlePwd} />
                     </div>
                 </div>
