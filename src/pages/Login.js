@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../css/Login.css';
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useResolvedPath } from "react-router-dom";
 import axios from 'axios';
 
 function Login() {
@@ -20,6 +20,7 @@ function Login() {
             setIsValidEmail(true);
         } else {
             setIsValidEmail(false);
+            setErr("")
         }
     }
 
@@ -27,26 +28,35 @@ function Login() {
         setPwd(e.target.value);
     }
 
+    useEffect(() => {
+        setErr("")
+    }, [])
+
     let navigate = useNavigate();
 
     const connecter = () => {
         setBtnState(true);
 
-        axios.post(`http://localhost:5000/api/user/login`, { email, password: pwd }).then(res => {
+        const url = 'http://localhost:5000/api/user/login';
+
+        axios.post(url, { email, password: pwd }).then(res => {
             console.log(res)
+            setErr("")
             if (res.data.jeton) {
                 localStorage.setItem('user', JSON.stringify(res.data))
             }
             setBtnState(false);
-        }).catch(err => {
-            console.log(err)
-            setErr(err)
+        }).catch(erreur => {
+            console.log(erreur)
+            setErr(erreur.response.data.message)
             setBtnState(false);
         })
-    }
+    };
+
+    console.log(err)
 
     return (
-        <div className='login container'>
+        <div className='col-sm-4 mt-3 container'>
             <div className='card'>
                 <div className='card-header'>
                     <h3 className='mt-4 text-center' style={{ with: '20px !important' }}> Connexion
@@ -65,26 +75,30 @@ function Login() {
                         </span>
                     </div>
 
-                    <div className='mt-3'>
+                    <div className='mt-3 mb-2'>
                         <label className='mb-1 text-dark' >Entrer votre mot de passe</label>
                         <input type="password" className='form-control' placeholder='Password' onChange={handlePwd} />
                     </div>
+
+
+                    {err.length > 0 ? <span className='text-danger text-center'>{err}.</span> : ""}
                 </div>
-                <div className='card-footer '>
+                <div className='card-footer text-center '>
                     {
                         pwd === "" || email === "" ?
                             <button
-                                disabled
+                                disabled style={{ width: "100%" }}
                                 className='btnConnect'>Se connecter</button> :
 
                             <button
                                 onClick={connecter}
                                 type='button'
-                                className='btnConnexion'>{btnState ? 'Connexion...' : 'Se connecter'}</button>
+                                className='btn' style={{ backgroundColor: '#14234a', color: "#fff", width: "100%" }}>{btnState ? <i className="fa fa-spinner fa-spin"></i> : 'Se connecter'}</button>
                     }
+                    <br />
+
+                    <h6 className='mt-2'>Pas de compte ? créer un <NavLink to='inscription'></NavLink></h6>
                 </div>
-                <br />
-                <h5>Pas de compte ? créer un <NavLink to='inscription'></NavLink></h5>
             </div>
         </div>
     )
