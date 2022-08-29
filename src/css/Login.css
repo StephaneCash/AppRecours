@@ -48,6 +48,9 @@
     margin-top: 15px !important;
     height: 50px;
 }
+.btn{
+    box-shadow: none !important;
+}
 
 .login .btn:focus {
     border: 1px solid #fff !important;

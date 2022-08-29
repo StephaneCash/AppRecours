@@ -13,7 +13,15 @@
 .card {
     box-shadow: 1px 1px 20px silver;
     height: auto;
-    padding: 10px;
+}
+
+.card-header{
+    background-color: #14234a !important;
+    color: white !important;
+}
+
+.card-body{
+    padding: 30px 20px !important;
 }
 
 .link {
