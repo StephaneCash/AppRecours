@@ -9,6 +9,7 @@ const StepContext = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState([]);
     const [finalData, setFinalData] = useState([]);
+    const [userLoggedIn, setUserLoggedIn] = useState({});
 
     function submitData() {
         alert('Allo vous avez fini')
@@ -16,7 +17,10 @@ const StepContext = () => {
 
     return (
         <div>
-            <multiStepContext.Provider value={{ currentStep, setCurrentStep, userData, setUserData, finalData, setFinalData, submitData }}>
+            <multiStepContext.Provider value={{
+                currentStep, setCurrentStep, userData,
+                setUserData, finalData, setFinalData, submitData, userLoggedIn, setUserLoggedIn
+            }}>
                 <App />
             </multiStepContext.Provider>
         </div>

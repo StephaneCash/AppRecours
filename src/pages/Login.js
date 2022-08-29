@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import '../css/Login.css';
 import { useState } from "react";
-import { NavLink, useNavigate, useResolvedPath } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { multiStepContext } from "../StepContext";
 
 function Login() {
 
@@ -11,6 +12,8 @@ function Login() {
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [err, setErr] = useState({});
+
+    const { setUserLoggedIn, userLoggedIn} = useContext(multiStepContext);
 
     // Is Valids Inputs
     const [isValidEmail, setIsValidEmail] = useState(false);
@@ -41,10 +44,16 @@ function Login() {
 
         axios.post(url, { email, password: pwd }).then(res => {
             console.log(res)
+            setUserLoggedIn(res.data);
             setErr("")
             if (res.data.jeton) {
                 localStorage.setItem('user', JSON.stringify(res.data))
             }
+
+            if(res.data.role === "admin"){
+
+            }
+            navigate('/dashboard');
             setBtnState(false);
         }).catch(erreur => {
             console.log(erreur)
@@ -53,7 +62,7 @@ function Login() {
         })
     };
 
-    console.log(err)
+    console.log(userLoggedIn , " DATA LOGGED")
 
     return (
         <div className='col-sm-4 mt-3 container'>

@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "../css/SideBar.css";
 import { NavLink } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai"
-import { Book, Chat, MenuBook, Person, School,  } from "@material-ui/icons"
+import { Book, Chat, MenuBook, Person, School, } from "@material-ui/icons"
 import { Avatar } from "@material-ui/core";
+import { multiStepContext } from "../StepContext";
+import axios from "axios";
 
 function SideBar() {
+
+    const { setUserLoggedIn, userLoggedIn } = useContext(multiStepContext);
+
+    const auth = { "authorization": 'Bearer ' + userLoggedIn.jeton };
+    console.log('DATA SIDE BAR ::: ', userLoggedIn)
+
+    const getOneUser = () => {
+        axios.get(`http://localhost:5000/api/users/${userLoggedIn.id}`, { headers: auth }).then(resp => {
+            console.log(resp)
+        }).catch(err => {
+            console.log(err.response)
+        })
+    };
+
+    useEffect(() => {
+        getOneUser()
+    }, [])
+
     return (
         <div className="sideBar">
             <div className="image">
