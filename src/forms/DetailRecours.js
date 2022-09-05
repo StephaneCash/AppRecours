@@ -1,10 +1,13 @@
 import { Modal } from "react-bootstrap";
 import "../css/DetailRecoursModal.css"
+import ReactToPrint from 'react-to-print';
+import React, { useEffect, useState, useRef } from 'react'
+
+
 const DetailRecours = (props) => {
 
+    const componentRef = useRef();
     const closeModal = props.closeModal;
-
-    console.log('CLOSED : ', closeModal)
 
     const styleBtn = { border: "1px solid silver" }
 
@@ -14,11 +17,17 @@ const DetailRecours = (props) => {
                 Detail Recours
             </Modal.Header>
             <Modal.Body>
-                Body
+                <div ref={componentRef}>
+                    Body
+                </div>
             </Modal.Body>
             <Modal.Footer style={{ paddingRight: "30px" }}>
+                <ReactToPrint
+                    trigger={() => <button className='btn' style={styleBtn}>Imprimer <i className="fa fa-print"></i></button>
+                    }
+                    content={() => componentRef.current}
+                />
                 <button className='btn' style={styleBtn} onClick={closeModal}>Fermer <i className="fa fa-close"></i></button>
-                <button className='btn' style={styleBtn}>Imprimer <i className="fa fa-print"></i></button>
             </Modal.Footer>
         </Modal>
     )
