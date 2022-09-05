@@ -14,6 +14,7 @@ function AddProf() {
     const [formData, setFormData] = useState(initialiseValues);
 
     const { id, nom, postnom } = formData;
+    const [errs, setErr] = useState({});
 
     const submitData = () => {
         if (state) {
@@ -34,7 +35,8 @@ function AddProf() {
                 })
                 .catch(err => {
                     console.log(err)
-                    swal({ title: "Echec", icon: "error", text: "Echec d'enregistrement" })
+                    setErr(err.response)
+                    swal({ title: "Remplissez tous les champs svp !", icon: "warning", text: errs.data.err.errors[0].message ? errs.data.err.errors[0].message : errs.data.err.errors[1].message })
                 });
         }
     };
@@ -42,7 +44,6 @@ function AddProf() {
     const changeValue = (e) => {
         const { value, id } = e.target;
         setFormData({ ...formData, [id]: value });
-        console.log(id, value)
     };
 
     useEffect(() => {
