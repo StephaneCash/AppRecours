@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
+
 
 function Register() {
 
@@ -12,28 +14,51 @@ function Register() {
     const [passRepete, setPassRepete] = useState('');
 
     const [btnState, setBtnState] = useState(false);
-    const [isValidEmail, setIsValidEmail] = useState(false);
+    const [err, setErr] = useState({});
 
-    console.log(role)
+    const navigate = useNavigate();
 
     const registerFunction = () => {
-        axios.post(`http://localhost:5000/api/users`, {
-            pseudo: pseudo, 
-            email: email,
-            password: pwd,
-            role: role
-        })
-        .then(res=>{
-            console.log(res)
-        })
-        .catch(err=>{
-            console.log(err.response);
-        });
+        setBtnState(true);
+        if (pwd.length < 6) {
+            swal({
+                title: 'Avertissement',
+                icon: 'warning',
+                text: "Votre mot de passe doit avoir au moins 6 caractères"
+            });
+            setBtnState(false);
+        } else if (pwd !== passRepete) {
+            swal({
+                title: 'Avertissement',
+                icon: 'warning',
+                text: "Les deux mots de passe ne correspondent pas."
+            });
+            setBtnState(false);
+        } else {
+            axios.post(`http://localhost:5000/api/users`, {
+                pseudo: pseudo,
+                email: email,
+                password: pwd,
+                role: role
+            })
+                .then(res => {
+                    swal({
+                        title: 'Succès',
+                        icon: 'success',
+                        text: `${res.data.message} vous serez redirectionné vers la page de connexion dans 3s`
+                    })
+                    setTimeout(() => {
+                        navigate('/');
+                    }, 3000)
+                    setBtnState(false);
+                })
+                .catch(err => {
+                    console.log(err.response);
+                    setErr(err.response)
+                    setBtnState(false);
+                });
+        }
     };
-
-    const handleEmail = (e) => {
-
-    }
 
     return (
 
@@ -60,28 +85,35 @@ function Register() {
                     <div className='row mt-3'>
                         <div className='col-sm-6'>
                             <label className='mb-1 text-dark'>Créer votre mot de passe</label>
-                            <input type="password" className='form-control' placeholder='Password' onChange={(e)=>setPwd(e.target.value)} />
+                            <input type="password" className='form-control' placeholder='Password' onChange={(e) => setPwd(e.target.value)} />
                         </div>
                         <div className='col-sm-6'>
                             <label className='mb-1 text-dark' >Répéter le mot de passe</label>
-                            <input type="password" className='form-control' placeholder='Password' onChange={(e)=>setPassRepete(e.target.value)} />
+                            <input type="password" className='form-control' placeholder='Password' onChange={(e) => setPassRepete(e.target.value)} />
                         </div>
                     </div>
 
                     <div className='row mt-3'>
                         <label>Choisir votre statut</label>
                         <div className='col-sm-12'>
-                            <select className='form-control' onChange={(e)=>setRole(e.target.value)}>
+                            <select className='form-control' onChange={(e) => setRole(e.target.value)}>
+                                <option>--Role--</option>
                                 <option>Etudiant</option>
                                 <option>Professeur</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div className='row'>
+                        <div className="col-sm-12">
+                            {err ? <span className="text-danger">{err.data}</span> : ""}
                         </div>
                     </div>
                 </div>
 
                 <div className='card-footer text-center '>
                     {
-                        pwd === "" || email === "" ?
+                        pwd === "" || email === "" || pseudo === "" || passRepete === "" || role === "" ?
                             <button
                                 disabled style={{ width: "100%" }}
                                 className='btnConnect'>Enregister-vous</button> :
