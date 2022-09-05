@@ -3,10 +3,21 @@ import { NavLink } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import axios from "axios";
 import swal from "sweetalert"
+import DetailRecours from "../forms/DetailRecours";
 
 function Recours() {
 
     const [recours, setRecours] = useState([]);
+
+    const [showModalDetailRecours, setShowModalDetailRecours] = useState(false);
+
+    const showModalDetailRecoursFunction = (val) => {
+        setShowModalDetailRecours(true);
+    };
+
+    const closeModalDetailRecours = () => {
+        setShowModalDetailRecours(false);
+    };
 
     const getAllRecours = () => {
         axios.get(`http://localhost:5000/api/recours`)
@@ -111,12 +122,11 @@ function Recours() {
                                                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                                                             }} onClick={() => deleteRecours(val.id)}>Supprimer</button>
 
-                                                                            <NavLink to={{ pathname: "add-filiere" }} state={{ val: val }}>
-                                                                                <button style={{
-                                                                                    flex: '1', float: 'right', textAlign: 'right',
-                                                                                    padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
-                                                                                }}>Détail</button>
-                                                                            </NavLink>
+                                                                            <button onClick={() => showModalDetailRecoursFunction(val)} style={{
+                                                                                flex: '1', float: 'right', textAlign: 'right',
+                                                                                padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
+                                                                            }}>Détail</button>
+
                                                                         </td>
                                                                     </tr>
                                                                 )
@@ -140,6 +150,10 @@ function Recours() {
                     </div>
                 </div>
             </div>
+            <DetailRecours
+                show={showModalDetailRecours}
+                closeModal={closeModalDetailRecours}
+            />
         </div>
     )
 }
