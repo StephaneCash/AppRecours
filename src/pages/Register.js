@@ -16,6 +16,8 @@ function Register() {
     const [btnState, setBtnState] = useState(false);
     const [err, setErr] = useState({});
 
+    const [clicBtnShowPass, setClicBtnShowPass] = useState(false);
+
     const navigate = useNavigate();
 
     const registerFunction = () => {
@@ -60,6 +62,18 @@ function Register() {
         }
     };
 
+    const showPassFunction = () => {
+        alert('kllk')
+        setClicBtnShowPass(!clicBtnShowPass);
+        if (clicBtnShowPass) {
+            const inputPass = document.getElementById('refPass')
+            inputPass.type = "text";
+        } else {
+            const inputPass = document.getElementById('refPass')
+            inputPass.type = "password";
+        }
+    };
+
     return (
 
         <div className='col-sm-4 mt-3 container'>
@@ -85,8 +99,8 @@ function Register() {
                     <div className='row mt-3'>
                         <div className='col-sm-6'>
                             <label className='mb-1 text-dark'>Créer votre mot de passe</label>
-                            <input type="password" className='form-control' placeholder='Password' onChange={(e) => setPwd(e.target.value)} />
-                            Voir le mot de passe <i className="fa fa-eye showPass"></i>
+                            <input type="password" className='form-control' placeholder='Password' id="refPass" onChange={(e) => setPwd(e.target.value)} />
+                            Voir le mot de passe <i className="fa fa-eye showPass" id='showPass' onClick={showPassFunction}></i>
                         </div>
                         <div className='col-sm-6'>
                             <label className='mb-1 text-dark' >Répéter le mot de passe</label>
