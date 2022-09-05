@@ -13,7 +13,7 @@ function Login() {
     const [pwd, setPwd] = useState('');
     const [err, setErr] = useState({});
 
-    const { setUserLoggedIn, userLoggedIn} = useContext(multiStepContext);
+    const { setUserLoggedIn, userLoggedIn } = useContext(multiStepContext);
 
     // Is Valids Inputs
     const [isValidEmail, setIsValidEmail] = useState(false);
@@ -50,7 +50,7 @@ function Login() {
                 localStorage.setItem('user', JSON.stringify(res.data))
             }
 
-            if(res.data.role === "admin"){
+            if (res.data.role === "admin") {
 
             }
             navigate('/dashboard');
@@ -62,7 +62,7 @@ function Login() {
         })
     };
 
-    console.log(userLoggedIn , " DATA LOGGED")
+    console.log(userLoggedIn, " DATA LOGGED")
 
     return (
         <div className='col-sm-4 mt-3 container'>
@@ -102,11 +102,11 @@ function Login() {
                             <button
                                 onClick={connecter}
                                 type='button'
-                                className='btn' style={{ backgroundColor: '#14234a', color: "#fff", width: "100%" }}>{btnState ? <i className="fa fa-spinner fa-spin"></i> : 'Se connecter'}</button>
+                                className='btn' style={{ border: "1px solid silver", width: "100%" }}>{btnState ? <i className="fa fa-spinner fa-spin"></i> : 'Se connecter'}</button>
                     }
                     <br />
 
-                    <h6 className='mt-2'>Pas de compte ? créer un <NavLink to='inscription'></NavLink></h6>
+                    <h6 className='mt-2'>Pas de compte ?  <NavLink to='/inscription'>créer un</NavLink></h6>
                 </div>
             </div>
         </div>
