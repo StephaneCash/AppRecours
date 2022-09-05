@@ -24,8 +24,7 @@ function AddProf() {
                     navigate('/professeurs');
                 })
                 .catch(err => {
-                    console.log(err)
-                    swal({ title: "Echec", icon: "error", text: "Echec d'enregistrement" })
+                    swal({ title: "Attention", icon: "warning", text: err.response.data.data.errors[0].message ? err.response.data.data.errors[0].message : err.response.data.data.errors[1].message })
                 })
         } else {
             axios.post(`http://localhost:5000/api/profs`, formData)
@@ -36,7 +35,7 @@ function AddProf() {
                 .catch(err => {
                     console.log(err)
                     setErr(err.response)
-                    swal({ title: "Remplissez tous les champs svp !", icon: "warning", text: errs.data.err.errors[0].message ? errs.data.err.errors[0].message : errs.data.err.errors[1].message })
+                    swal({ title: "Attention !", icon: "warning", text: errs.data.err.errors[0].message ? errs.data.err.errors[0].message : errs.data.err.errors[1].message })
                 });
         }
     };
