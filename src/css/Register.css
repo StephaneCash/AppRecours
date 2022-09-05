@@ -1,0 +1,7 @@
+.showPass{
+    cursor: pointer;
+    border: 1px solid silver;
+    padding: 5px;
+    border-radius: 7px;
+    margin-top: 5px;
+}

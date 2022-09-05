@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-
+import "../css/Register.css";
 
 function Register() {
 
@@ -86,6 +86,7 @@ function Register() {
                         <div className='col-sm-6'>
                             <label className='mb-1 text-dark'>Créer votre mot de passe</label>
                             <input type="password" className='form-control' placeholder='Password' onChange={(e) => setPwd(e.target.value)} />
+                            Voir le mot de passe <i className="fa fa-eye showPass"></i>
                         </div>
                         <div className='col-sm-6'>
                             <label className='mb-1 text-dark' >Répéter le mot de passe</label>
