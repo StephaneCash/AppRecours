@@ -59,12 +59,13 @@ function Cours() {
                         <main>
                             <section className="recent">
                                 <h4>Liste de cours</h4>
-                                <div className='d-flex'>
+                                <div className='d-flex card-header'>
                                     <div className="col-2">{dataCours.taille && dataCours.taille} Cours</div>
 
                                     <div className='col-10'>
                                         <NavLink to='add-cours' style={{ textAlign: 'right' }}>
                                             <button style={{
+                                                border: "1px solid #fff",
                                                 flex: '1', float: 'right', textAlign: 'right', marginBottom: '10px',
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                             }} >Ajouter un cours</button>

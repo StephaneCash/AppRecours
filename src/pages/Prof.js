@@ -60,12 +60,13 @@ function Prof() {
                         <main>
                             <section className="recent">
                                 <h4>Liste de professeurs</h4>
-                                <div className='d-flex'>
+                                <div className='d-flex card-header'>
                                     <div className="col-2">{profs.taille > 1 ? profs.taille + " Professeurs" : profs.taille + ' Professeur'}</div>
 
                                     <div className='col-10'>
                                         <NavLink to='add-prof' style={{ textAlign: 'right' }}>
                                             <button style={{
+                                                border: "1px solid #fff",
                                                 flex: '1', float: 'right', textAlign: 'right', marginBottom: '10px',
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                             }} >Ajouter un prof</button>

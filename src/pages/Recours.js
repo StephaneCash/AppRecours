@@ -71,7 +71,7 @@ function Recours() {
                                                 <div className="col-2"> {recours.taille && recours.taille} Recours</div>
                                                 <div className='col-10'>
                                                     <NavLink to='addRecours' style={{ textAlign: 'right' }}>
-                                                        <button style={{ flex: '1', float: 'right', textAlign: 'right', padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a' }}>Créer un recours</button>
+                                                        <button style={{ flex: '1', float: 'right', textAlign: 'right', padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a', border: "1px solid #fff" }}>Créer un recours</button>
                                                     </NavLink>
                                                 </div>
                                             </div>

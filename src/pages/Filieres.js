@@ -59,12 +59,13 @@ function Filieres() {
                             <section className="recent">
                                 <h4>Liste de filières</h4>
 
-                                <div className='d-flex'>
+                                <div className='d-flex card-header'>
                                     <div className="col-2">{dataFilieres.taille && dataFilieres.taille} {dataFilieres.taille <= 1 ? 'Filière' : "Filières"}</div>
 
                                     <div className='col-10'>
                                         <NavLink to='add-filiere' style={{ textAlign: 'right' }}>
                                             <button style={{
+                                                border: "1px solid #fff",
                                                 flex: '1', float: 'right', textAlign: 'right', marginBottom: '10px',
                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                             }} >Ajouter une filière</button>
