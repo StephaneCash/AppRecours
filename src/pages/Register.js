@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
-
+import axios from "axios";
 
 function Register() {
 
@@ -8,19 +8,27 @@ function Register() {
     const [email, setEmail] = useState('');
     const [role, setRole] = useState('');
 
+    const [pseudo, setPseudo] = useState('');
+    const [passRepete, setPassRepete] = useState('');
+
     const [btnState, setBtnState] = useState(false);
     const [isValidEmail, setIsValidEmail] = useState(false);
 
-    const handlePwd = (e) => {
-
-    };
-
-    const repetePwd = (e) => {
-
-    };
+    console.log(role)
 
     const registerFunction = () => {
-
+        axios.post(`http://localhost:5000/api/users`, {
+            pseudo: pseudo, 
+            email: email,
+            password: password,
+            role: role
+        })
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err.response);
+        });
     };
 
     const handleEmail = (e) => {
@@ -38,27 +46,39 @@ function Register() {
                     </h3>
                 </div>
                 <div className='card-body'>
-                    <div className='mb-3'>
-                        <label className='mb-1 text-dark'>Entrer votre username ou votre email</label>
-                        <input type="email" className='form-control' placeholder='Email ou Username' onChange={(e) => (handleEmail, setEmail(e.target.value))} required />
-                        <span>
-                            {
-                                btnState && isValidEmail ? <span className='text-danger'>Veuillez entrer une adresse email svp.</span> : ""
-                            }
-                        </span>
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            <label className='mb-1 text-dark'>Entrer un username</label>
+                            <input type="text" className='form-control' placeholder='Email ou Username' onChange={(e) => (setPseudo(e.target.value))} required />
+                        </div>
+                        <div className='col-sm-6'>
+                            <label className='mb-1 text-dark'>Entrer une adresse email</label>
+                            <input type="email" className='form-control' placeholder='Email ou Username' onChange={(e) => (setEmail(e.target.value))} required />
+                        </div>
                     </div>
 
-                    <div className='mt-3 mb-2'>
-                        <label className='mb-1 text-dark' >Créer votre mot de passe</label>
-                        <input type="password" className='form-control' placeholder='Password' onChange={handlePwd} />
+                    <div className='row mt-3'>
+                        <div className='col-sm-6'>
+                            <label className='mb-1 text-dark'>Créer votre mot de passe</label>
+                            <input type="password" className='form-control' placeholder='Password' onChange={(e)=>setPwd(e.target.value)} />
+                        </div>
+                        <div className='col-sm-6'>
+                            <label className='mb-1 text-dark' >Répéter le mot de passe</label>
+                            <input type="password" className='form-control' placeholder='Password' onChange={(e)=>setPassRepete(e.target.value)} />
+                        </div>
                     </div>
 
-                    <div className='mt-3 mb-2'>
-                        <label className='mb-1 text-dark' >Répéter le mot de passe</label>
-                        <input type="password" className='form-control' placeholder='Password' onChange={repetePwd} />
+                    <div className='row mt-3'>
+                        <label>Choisir votre statut</label>
+                        <div className='col-sm-12'>
+                            <select className='form-control' onChange={(e)=>setRole(e.target.value)}>
+                                <option>Etudiant</option>
+                                <option>Professeur</option>
+                            </select>
+                        </div>
                     </div>
-
                 </div>
+
                 <div className='card-footer text-center '>
                     {
                         pwd === "" || email === "" ?
