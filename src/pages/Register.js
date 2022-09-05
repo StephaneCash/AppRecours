@@ -65,11 +65,9 @@ function Register() {
         setClic(!clic);
 
         if (clic) {
-            setClicBtnShowPass(!clicBtnShowPass);
             const inputPass = document.getElementById('refPass')
             inputPass.type = "text";
         } else {
-            setClicBtnShowPass(!clicBtnShowPass);
             const inputPass = document.getElementById('refPass')
             inputPass.type = "password";
         }
