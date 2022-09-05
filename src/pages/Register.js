@@ -13,10 +13,9 @@ function Register() {
     const [pseudo, setPseudo] = useState('');
     const [passRepete, setPassRepete] = useState('');
 
-    const [btnState, setBtnState] = useState(false);
+    const [btnState, setBtnState] = useState(true);
     const [err, setErr] = useState({});
-
-    const [clicBtnShowPass, setClicBtnShowPass] = useState(false);
+    const [clic, setClic] = useState(true);
 
     const navigate = useNavigate();
 
@@ -63,12 +62,14 @@ function Register() {
     };
 
     const showPassFunction = () => {
-        alert('kllk')
-        setClicBtnShowPass(!clicBtnShowPass);
-        if (clicBtnShowPass) {
+        setClic(!clic);
+
+        if (clic) {
+            setClicBtnShowPass(!clicBtnShowPass);
             const inputPass = document.getElementById('refPass')
             inputPass.type = "text";
         } else {
+            setClicBtnShowPass(!clicBtnShowPass);
             const inputPass = document.getElementById('refPass')
             inputPass.type = "password";
         }
