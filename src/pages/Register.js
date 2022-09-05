@@ -20,7 +20,7 @@ function Register() {
         axios.post(`http://localhost:5000/api/users`, {
             pseudo: pseudo, 
             email: email,
-            password: password,
+            password: pwd,
             role: role
         })
         .then(res=>{
