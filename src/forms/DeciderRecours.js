@@ -9,9 +9,9 @@ function DeciderRecours(props) {
     const [etatForm, setEtatForm] = useState(false);
     const [etat, setEtat] = useState();
 
-    const [cAnnee, setCAnnee] = useState(0);
-    const [cExamen, setCExamen] = useState(0);
-    // console.log(data)
+    const [cAnnee, setCAnnee] = useState("");
+    const [cExamen, setCExamen] = useState("");
+    console.log(cAnnee, cExamen)
 
     useEffect(() => {
         setEtat(data.statut)
@@ -26,8 +26,14 @@ function DeciderRecours(props) {
     const saveData = () => {
         axios.put(`http://localhost:5000/api/recours/${data.id}`, { statut: 2, coteAnneeRepondu: cAnnee, coteExamRepondu: cExamen })
             .then(resp => {
-                console.log(resp)
                 setEtat(2);
+                setCAnnee("")
+                setCExamen("");
+                swal({
+                    title: "Succès",
+                    icon: "success",
+                    text: "Vous venez de répondre au recours."
+                });
             })
             .catch(err => {
                 console.log(err.response)
@@ -41,7 +47,7 @@ function DeciderRecours(props) {
                     title: "Rejet",
                     icon: "success",
                     text: "Vous venez de rejeter ce recours"
-                })
+                });
                 setEtat(1);
             })
             .catch(err => {
@@ -103,7 +109,7 @@ function DeciderRecours(props) {
                                 <input type="number" className="form-control" placeholder='Cote examen' onChange={(e) => setCExamen(e.target.value)} /> <br />
                             </form>
                             {
-                                cAnnee && cExamen ?
+                                cAnnee !== "" && cExamen !== "" ?
                                     <button type="button" onClick={saveData} style={styleBtn} className='btn'>Valider</button>
                                     :
                                     <button type="button" disabled style={styleBtn} className='btn'>Valider</button>
