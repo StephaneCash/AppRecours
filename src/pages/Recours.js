@@ -10,11 +10,12 @@ function Recours() {
     const [recours, setRecours] = useState([]);
 
     const [showModalDetailRecours, setShowModalDetailRecours] = useState(false);
+    const [valRecours, setValRecours] = useState([]);
 
     const showModalDetailRecoursFunction = (val) => {
         setShowModalDetailRecours(true);
+        setValRecours(val);
     };
-
     const closeModalDetailRecours = () => {
         setShowModalDetailRecours(false);
     };
@@ -153,6 +154,7 @@ function Recours() {
             <DetailRecours
                 show={showModalDetailRecours}
                 closeModal={closeModalDetailRecours}
+                data={valRecours}
             />
         </div>
     )

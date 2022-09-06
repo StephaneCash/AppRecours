@@ -12,11 +12,11 @@ function SideBar() {
     const { setUserLoggedIn, userLoggedIn } = useContext(multiStepContext);
 
     const auth = { "authorization": 'Bearer ' + userLoggedIn.jeton };
-    console.log('DATA SIDE BAR ::: ', userLoggedIn)
+    //console.log('DATA SIDE BAR ::: ', userLoggedIn)
 
     const getOneUser = () => {
         axios.get(`http://localhost:5000/api/users/${userLoggedIn.id}`, { headers: auth }).then(resp => {
-            console.log(resp)
+          //  console.log(resp)
         }).catch(err => {
             console.log(err.response)
         })
