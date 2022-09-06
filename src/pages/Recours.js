@@ -4,6 +4,7 @@ import SideBar from '../components/SideBar';
 import axios from "axios";
 import swal from "sweetalert"
 import DetailRecours from "../forms/DetailRecours";
+import DeciderRecours from '../forms/DeciderRecours';
 
 function Recours() {
 
@@ -11,6 +12,9 @@ function Recours() {
 
     const [showModalDetailRecours, setShowModalDetailRecours] = useState(false);
     const [valRecours, setValRecours] = useState([]);
+    const [showModalDeciderRecourss, setShowModalDeciderRecours] = useState(false);
+    const [data, setData] = useState([]);
+
 
     const showModalDetailRecoursFunction = (val) => {
         setShowModalDetailRecours(true);
@@ -65,6 +69,15 @@ function Recours() {
         });
     };
 
+    const showModalDecider = (val) => {
+        setShowModalDeciderRecours(true);
+        setData(val);
+    };
+
+    const closeModalDecoderRecours = () => {
+        setShowModalDeciderRecours(false);
+    };
+
     return (
         <div className='col-md-12'>
             <div className='d-flex'>
@@ -99,7 +112,7 @@ function Recours() {
                                                         <th>Cours</th>
                                                         <th>Professeur</th>
                                                         <th style={{ width: '130px' }}>Statut</th>
-                                                        <th style={{ width: '160px' }}>Actions</th>
+                                                        <th style={{ width: '240px' }}>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -115,7 +128,9 @@ function Recours() {
                                                                         <td>{val.cours}</td>
                                                                         <td>{val.nomCompletProf}</td>
                                                                         <td>
-                                                                            {val.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> : "Répondu"}
+                                                                            {val.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> : 
+                                                                            val.statut === 1 ? <span className="text-danger">Rejeté <i className='fa fa-close'></i></span> : ""
+                                                                            }
                                                                         </td>
                                                                         <td>
                                                                             <button style={{
@@ -123,11 +138,16 @@ function Recours() {
                                                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                                                             }} onClick={() => deleteRecours(val.id)}>Supprimer</button>
 
+
+                                                                            <button onClick={() => showModalDecider(val)} style={{
+                                                                                flex: '1', float: 'right', textAlign: 'right', marginLeft: "5px",
+                                                                                padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
+                                                                            }}>Répondre</button>
+
                                                                             <button onClick={() => showModalDetailRecoursFunction(val)} style={{
                                                                                 flex: '1', float: 'right', textAlign: 'right',
                                                                                 padding: '4px', borderRadius: '5px', color: 'white', backgroundColor: '#14234a'
                                                                             }}>Détail</button>
-
                                                                         </td>
                                                                     </tr>
                                                                 )
@@ -155,6 +175,11 @@ function Recours() {
                 show={showModalDetailRecours}
                 closeModal={closeModalDetailRecours}
                 data={valRecours}
+            />
+            <DeciderRecours
+                show={showModalDeciderRecourss}
+                data={data}
+                close={closeModalDecoderRecours}
             />
         </div>
     )
