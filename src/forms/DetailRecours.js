@@ -107,11 +107,14 @@ const DetailRecours = (props) => {
                                     </tr>
                                     <tr>
                                         <td colSpan='2px'>
-                                            Année: <hr />
+                                            Année: <br />
+                                            {data ? data.coteAnneeRepondu : ""}
 
                                         </td>
                                         <td colSpan='2px'>
-                                            Examen <hr />
+                                            Examen : <br />
+                                            {data ? data.coteExamRepondu : ""}
+
                                         </td>
                                     </tr>
                                 </tbody>

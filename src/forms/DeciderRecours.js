@@ -8,13 +8,14 @@ function DeciderRecours(props) {
     const close = props.close;
     const [etatForm, setEtatForm] = useState(false);
     const [etat, setEtat] = useState();
+
+    const [cAnnee, setCAnnee] = useState(0);
+    const [cExamen, setCExamen] = useState(0);
     // console.log(data)
 
     useEffect(() => {
         setEtat(data.statut)
     }, [data]);
-
-    console.log(etat)
 
     const styleBtn = { border: "1px solid silver" };
 
@@ -23,7 +24,7 @@ function DeciderRecours(props) {
     };
 
     const saveData = () => {
-        axios.put(`http://localhost:5000/api/recours/${data.id}`, { statut: 2 })
+        axios.put(`http://localhost:5000/api/recours/${data.id}`, { statut: 2, coteAnneeRepondu: cAnnee, coteExamRepondu: cExamen })
             .then(resp => {
                 console.log(resp)
                 setEtat(2);
@@ -49,33 +50,36 @@ function DeciderRecours(props) {
     };
     return (
 
-        <Modal show={props.show} style={{ marginTop: "20px" }} >
+        <Modal show={props.show} >
             <Modal.Header style={{ backgroundColor: '#162349', color: '#fff' }}>
                 Répondre au recours
             </Modal.Header>
             <Modal.Body>
                 <div className="alert alert-success">
                     <h5>Idéntité de l'étudian</h5>
-                    <table className="table table-bordered">
+                    <table className="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Nom</th>
-                                <th>Postnom</th>
+                                <th>Noms</th>
                                 <th>Promotion</th>
                                 <th>Cours</th>
-                                <th>Cote Année</th>
-                                <th>Cote Examen</th>
+                                <th>Cotes</th>
+                                <th>Objet recours</th>
                                 <th>Statut</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{data ? data.nomEtudiant : ""}</td>
-                                <td>{data ? data.postnomEtudiant : ""}</td>
+                                <td>{data ? data.nomEtudiant + ' ' + data.postnomEtudiant : ""}</td>
                                 <td>{data ? data.promotion : ""}</td>
                                 <td>{data ? data.cours : ""}</td>
-                                <td>{data ? data.coteAnnee : ""}</td>
-                                <td>{data ? data.coteExamen : ""}</td>
+                                <td>
+                                    <tr>
+                                        <td style={{border:"1px solid silver", padding:'5px'}}>Année : {data ? data.coteAnnee : ""}</td>
+                                        <td style={{border:"1px solid silver", padding:'5px'}}>Examen : {data ? data.coteExamen : ""}</td>
+                                    </tr>
+                                </td>
+                                <td>{data ? data.objetRecours : ""}</td>
                                 <td>
                                     {
                                         etat === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> :
@@ -94,11 +98,16 @@ function DeciderRecours(props) {
                         <div className="col-sm-6">
                             <form>
                                 <label>Entrer la cote de l'année</label>
-                                <input type="text" className="form-control" placeholder='Cote année' />
+                                <input type="number" className="form-control" placeholder='Cote année' onChange={(e) => setCAnnee(e.target.value)} />
                                 <label>Entrer la cote de l'examen</label>
-                                <input type="text" className="form-control" placeholder='Cote examen' /> <br />
+                                <input type="number" className="form-control" placeholder='Cote examen' onChange={(e) => setCExamen(e.target.value)} /> <br />
                             </form>
-                            <button type="button" onClick={saveData} style={styleBtn} className='btn'>Valider <i className="fa fa-save"></i></button>
+                            {
+                                cAnnee && cExamen ?
+                                    <button type="button" onClick={saveData} style={styleBtn} className='btn'>Valider</button>
+                                    :
+                                    <button type="button" disabled style={styleBtn} className='btn'>Valider</button>
+                            }
                         </div>
                     </div>
                     :
