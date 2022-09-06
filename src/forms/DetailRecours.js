@@ -10,7 +10,7 @@ const DetailRecours = (props) => {
     const closeModal = props.closeModal;
     const data = props.data;
 
-    console.log(data)
+    const postnomProf = data.nomCompletProf.split(" ");
 
     const styleBtn = { border: "1px solid silver" }
 
@@ -75,10 +75,10 @@ const DetailRecours = (props) => {
                                         <td className='text-center' colSpan="2px">IDENTITE DE L'ENSEIGNANT CONCERNE</td>
                                     </tr>
                                     <tr>
-                                        <td>Nom</td> <td>{data ? data.nomCompletProf : ""}</td>
+                                        <td>Nom</td> <td>{data ? postnomProf[0] : ""}</td>
                                     </tr>
                                     <tr>
-                                        <td>Postnom</td>
+                                        <td>Postnom : </td> <td>{ data ? postnomProf[1] : ""}</td>
                                     </tr>
                                     <tr>
                                         <td>Cours : </td> <td>{data ? data.cours : ""}</td>
