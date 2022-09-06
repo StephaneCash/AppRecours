@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal } from "react-bootstrap";
 import axios from "axios";
+import swal from "sweetalert";
 
 function DeciderRecours(props) {
     const data = props.data;
     const close = props.close;
     const [etatForm, setEtatForm] = useState(false);
-   // console.log(data)
+    const [etat, setEtat] = useState();
+    // console.log(data)
+
+    useEffect(() => {
+        setEtat(data.statut)
+    }, [data]);
+
+    console.log(etat)
 
     const styleBtn = { border: "1px solid silver" };
 
@@ -14,18 +22,30 @@ function DeciderRecours(props) {
         setEtatForm(!etatForm);
     };
 
-    const saveData = () =>{
-
+    const saveData = () => {
+        axios.put(`http://localhost:5000/api/recours/${data.id}`, { statut: 2 })
+            .then(resp => {
+                console.log(resp)
+                setEtat(2);
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
     };
 
-    const rejectRecours = () =>{
-        axios.put(`http://localhost:5000/api/recours/${data.id}`, {statut: 1})
-        .then(resp=>{
-            console.log(resp.data)
-        })
-        .catch(err=>{
-            console.log(err.response)
-        })
+    const rejectRecours = () => {
+        axios.put(`http://localhost:5000/api/recours/${data.id}`, { statut: 1 })
+            .then(resp => {
+                swal({
+                    title: "Rejet",
+                    icon: "success",
+                    text: "Vous venez de rejeter ce recours"
+                })
+                setEtat(1);
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
     };
     return (
 
@@ -56,7 +76,13 @@ function DeciderRecours(props) {
                                 <td>{data ? data.cours : ""}</td>
                                 <td>{data ? data.coteAnnee : ""}</td>
                                 <td>{data ? data.coteExamen : ""}</td>
-                                <td>{data ? data.statut === 0 ? <>En cours... <i className="fa fa-spinner fa-spin"></i></> : "" : ""}</td>
+                                <td>
+                                    {
+                                        etat === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> :
+                                            etat === 1 ? <span className="text-danger">Rejeté <i className='fa fa-close'></i></span> :
+                                                etat === 2 ? "Répondu" : ""
+                                    }
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -83,7 +109,10 @@ function DeciderRecours(props) {
                 <button style={styleBtn} className='btn' onClick={showForm}>
                     {etatForm ? "Cacher le formulaire" : "Répondre"}
                     <i className="fa fa-graduat"></i></button>
-                <button style={styleBtn} className='btn' onClick={rejectRecours}>Rejeter <i className="fa fa-close"></i></button>
+                {data ? etat === 1 ? "" :
+                    <button style={styleBtn} className='btn' onClick={rejectRecours}>Rejeter <i className="fa fa-close"></i></button>
+                    : ""
+                }
                 <button style={styleBtn} className='btn' onClick={close}>Fermer <i className="fa fa-close"></i></button>
             </Modal.Footer>
         </Modal>

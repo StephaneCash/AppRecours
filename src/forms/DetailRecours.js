@@ -81,7 +81,7 @@ const DetailRecours = (props) => {
                                         <td>Nom</td> <td>{data ? postnomProf : ""}</td>
                                     </tr>
                                     <tr>
-                                        <td>Postnom : </td> <td>{ data ? postnomProf : ""}</td>
+                                        <td>Postnom : </td> <td>{data ? postnomProf : ""}</td>
                                     </tr>
                                     <tr>
                                         <td>Cours : </td> <td>{data ? data.cours : ""}</td>
@@ -94,8 +94,13 @@ const DetailRecours = (props) => {
                                         <td className="text-center" colSpan="4px">AVIS DE L'ENSEIGNANT</td>
                                     </tr>
                                     <tr>
-                                        <td colSpan="3px">Statut Recours </td> 
-                                        <td>{ data  ? data.statut === 0 ? <>En cours... <i className="fa fa-spinner fa-spin"></i></> : "" : ""}</td>
+                                        <td colSpan="3px">Statut Recours </td>
+                                        <td>
+                                            {data.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> :
+                                                data.statut === 1 ? <span className="text-danger">Rejeté <i className='fa fa-close'></i></span> :
+                                                    data.statut === 2 ? <span className="text-success">Répondu <i className='fa fa-check'></i></span> : ""
+                                            }
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th colSpan="4px" className="text-center">Cotes réelles</th>

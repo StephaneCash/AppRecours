@@ -76,6 +76,7 @@ function Recours() {
 
     const closeModalDecoderRecours = () => {
         setShowModalDeciderRecours(false);
+        getAllRecours()
     };
 
     return (
@@ -128,8 +129,9 @@ function Recours() {
                                                                         <td>{val.cours}</td>
                                                                         <td>{val.nomCompletProf}</td>
                                                                         <td>
-                                                                            {val.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> : 
-                                                                            val.statut === 1 ? <span className="text-danger">Rejeté <i className='fa fa-close'></i></span> : ""
+                                                                            {val.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> :
+                                                                                val.statut === 1 ? <span className="text-danger">Rejeté <i className='fa fa-close'></i></span> :
+                                                                                    val.statut === 2 ? <span className="text-success">Répondu <i className='fa fa-check'></i></span> : ""
                                                                             }
                                                                         </td>
                                                                         <td>
