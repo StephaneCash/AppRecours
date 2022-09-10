@@ -11,7 +11,6 @@ function DeciderRecours(props) {
 
     const [cAnnee, setCAnnee] = useState("");
     const [cExamen, setCExamen] = useState("");
-    console.log(cAnnee, cExamen)
 
     useEffect(() => {
         setEtat(data.statut)
@@ -24,20 +23,29 @@ function DeciderRecours(props) {
     };
 
     const saveData = () => {
-        axios.put(`http://localhost:5000/api/recours/${data.id}`, { statut: 2, coteAnneeRepondu: cAnnee, coteExamRepondu: cExamen })
-            .then(resp => {
-                setEtat(2);
-                setCAnnee("")
-                setCExamen("");
-                swal({
-                    title: "Succès",
-                    icon: "success",
-                    text: "Vous venez de répondre au recours."
-                });
+        if (data.ponderationCours < parseFloat(cAnnee) || data.ponderationCours < parseFloat(cExamen)) {
+            swal({
+                title: "Avertissement",
+                icon: "error",
+                text: `Vos cotes doivent être inférieures ou égales à la pondération qui est de ${data.ponderationCours}`
             })
-            .catch(err => {
-                console.log(err.response)
-            })
+        } else {
+            axios.put(`http://localhost:5000/api/recours/${data.id}`, { statut: 2, coteAnneeRepondu: cAnnee, coteExamRepondu: cExamen })
+                .then(resp => {
+                    setEtat(2);
+                    setCAnnee("")
+                    setCExamen("");
+                    swal({
+                        title: "Succès",
+                        icon: "success",
+                        text: "Vous venez de répondre au recours."
+                    });
+                    setEtatForm(false);
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
+        }
     };
 
     const rejectRecours = () => {
@@ -81,8 +89,8 @@ function DeciderRecours(props) {
                                 <td>{data ? data.cours : ""}</td>
                                 <td>
                                     <tr>
-                                        <td style={{border:"1px solid silver", padding:'5px'}}>Année : {data ? data.coteAnnee : ""}</td>
-                                        <td style={{border:"1px solid silver", padding:'5px'}}>Examen : {data ? data.coteExamen : ""}</td>
+                                        <td style={{ border: "1px solid silver", padding: '5px' }}>Année : {data ? data.coteAnnee : ""}</td>
+                                        <td style={{ border: "1px solid silver", padding: '5px' }}>Examen : {data ? data.coteExamen : ""}</td>
                                     </tr>
                                 </td>
                                 <td>{data ? data.objetRecours : ""}</td>
@@ -97,6 +105,7 @@ function DeciderRecours(props) {
                         </tbody>
                     </table>
                     <br />
+                    Pondération Cours : {data ? data.ponderationCours : ""}<br />
                     Professeur : {data ? data.nomCompletProf : ""}
                 </div>
                 {etatForm ?

@@ -13,7 +13,7 @@ function Register() {
     const [pseudo, setPseudo] = useState('');
     const [passRepete, setPassRepete] = useState('');
 
-    const [btnState, setBtnState] = useState(true);
+    const [btnState, setBtnState] = useState(false);
     const [err, setErr] = useState({});
     const [clic, setClic] = useState(true);
 

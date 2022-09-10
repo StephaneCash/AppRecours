@@ -11,18 +11,16 @@ function ReceivedDataForm() {
 
     let navigate = useNavigate();
 
-    console.log(userData)
-
     useEffect(() => {
         axios.post(`http://localhost:5000/api/recours`, {
             nomEtudiant: userData.nom, postnomEtudiant: userData.postnom, promotion: userData.promotion,
             objetRecours: userData.objetRecours, coteExamen: userData.coteExamen, coteAnnee: userData.coteAnnee,
-            nomCompletProf: userData.nomProf, cours: userData.cours
+            nomCompletProf: userData.nomProf, cours: userData.cours, ponderationCours: userData.ponderation
         }).then(resp => {
             if (resp.status === 201) {
                 swal({ title: "Succès", icon: "success", text: resp.data.message });
                 navigate("/recours");
-                setUserData({ nom: "", postnom: "", promotion: "", objetRecours: "", coteAnnee: "", coteExamen: "", nomProf: "", cours: "" })
+                setUserData({ nom: "", postnom: "", promotion: "", objetRecours: "", coteAnnee: "", coteExamen: "", nomProf: "", cours: "", ponderation: "" })
             } else {
                 navigate("/recours/addRecours");
                 setCurrentStep(1);
@@ -31,7 +29,7 @@ function ReceivedDataForm() {
         }).catch(err => {
             navigate("/recours/addRecours");
             setCurrentStep(1);
-            console.log(err);
+            console.log(err.response);
         })
     }, [data]);
 
@@ -41,12 +39,7 @@ function ReceivedDataForm() {
         }
     }, [userData])
 
-    return (
-        <div className='col-md-12 container'>
-            <h3 className="text-center">Identité Etudiant</h3>
-
-        </div>
-    )
+    return null
 }
 
 export default ReceivedDataForm

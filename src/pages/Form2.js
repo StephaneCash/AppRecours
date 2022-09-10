@@ -66,12 +66,20 @@ function Form2() {
     }
 
     const handleCours = (e) => {
+        let value = e.target.value
+        let valSub = value.split(" ")
+        let lenghtValue = valSub.length
+        console.log(parseInt(valSub[lenghtValue - 1]))
+        setUserData({ ...userData, "cours": valSub[lenghtValue - 2], "ponderation" : parseInt(valSub[lenghtValue - 1]) })
+
         if (e.target.value === '--Cours--') {
             setIsValidCours(false);
         } else {
             setIsValidCours(true);
         }
     }
+
+    console.log(userData)
 
     const nextStep = (e) => {
         e.preventDefault();
@@ -110,13 +118,13 @@ function Form2() {
                                     userData.nomProf ? <>Professeur choisi : <span style={{ color: "green" }}>{userData.nomProf}</span>.</> : ' Aucun cours n\'a été choisi.'
                                 }
                                 {
-                                    click === true && 
+                                    click === true &&
                                     <>
                                         {
                                             isValidNom === false ? 'Veuillez renseigner le nom du professeur svp !' : ''
                                         }
                                     </>
-                                } 
+                                }
                             </div>
                             <div className="col-sm-6">
                                 <label style={{ marginBottom: '10px' }}>Postnom:</label> <br />
@@ -142,16 +150,14 @@ function Form2() {
                             <select
                                 className="form-control"
                                 value={userData['cours']}
-                                onChange={(e) => (setUserData({ ...userData, 'cours': e.target.value }), handleCours(e))}
+                                onChange={handleCours}
                                 style={{ width: "100%", marginRight: "10px", height: "61px", marginTop: '-5px', boxShadow: "none", border: "1px solid silver" }}
                             >
                                 <option>--Cours--</option>
                                 {dataProfOne.data && dataProfOne.data.map((val, index) => {
                                     return val.cours.map((val, index) => {
                                         return (
-                                            <>
-                                                <option key={index}>{val.nom}</option>
-                                            </>
+                                            <option key={index}>{val.nom} {val.ponderation}</option>
                                         )
                                     })
                                 })}

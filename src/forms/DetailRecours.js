@@ -1,12 +1,9 @@
 import { Modal } from "react-bootstrap";
 import "../css/DetailRecoursModal.css"
-import ReactToPrint from 'react-to-print';
-import React, { useRef } from 'react'
+import React from 'react'
 
 
 const DetailRecours = (props) => {
-
-    const componentRef = useRef();
     const closeModal = props.closeModal;
     const data = props.data;
 
@@ -18,117 +15,75 @@ const DetailRecours = (props) => {
     const styleBtn = { border: "1px solid silver" }
 
     return (
-        <Modal show={props.show} style={{ marginTop: "50px" }} id='modal'>
+        <Modal show={props.show} id='modal'>
             <Modal.Header style={{ backgroundColor: '#162349', color: '#fff' }}>
                 Detail Recours
             </Modal.Header>
             <Modal.Body>
-                <div ref={componentRef}>
-                    <div className="d-flex">
-                        <div className="col-sm-6">
-                            <table className="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td className='text-center' colSpan='2px'>CASE RESERVEE A L'ETUDIANT</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nom : </td> <td>{data ? data.nomEtudiant : ""}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Postnom : </td> <td>{data ? data.postnomEtudiant : ""}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Promotion : </td> <td>{data ? data.promotion : ""}</td>
-                                    </tr>
-                                </tbody>
-
-                            </table>
-                            <table className="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td className='text-center' colSpan="2px">OBJET DU RECOURS</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Object : </td> <td>{data ? data.objetRecours : ""}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table className="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td>Cote marquée sur le bulletin</td>
-
-                                        <td>
-                                            Année: <hr />
-                                            {data ? data.coteAnnee : ""}
-                                        </td>
-                                        <td>
-                                            Examen <hr />
-                                            {data ? data.coteExamen : ""}
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="col-sm-6">
-                            <table className="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td className='text-center' colSpan="2px">IDENTITE DE L'ENSEIGNANT CONCERNE</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nom</td> <td>{data ? postnomProf : ""}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Postnom : </td> <td>{data ? postnomProf : ""}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cours : </td> <td>{data ? data.cours : ""}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table className="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td className="text-center" colSpan="4px">AVIS DE L'ENSEIGNANT</td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan="3px">Statut Recours </td>
-                                        <td>
-                                            {data.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> :
-                                                data.statut === 1 ? <span className="text-danger">Rejeté <i className='fa fa-close'></i></span> :
-                                                    data.statut === 2 ? <span className="text-success">Répondu <i className='fa fa-check'></i></span> : ""
-                                            }
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th colSpan="4px" className="text-center">Cotes réelles</th>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan='2px'>
-                                            Année: <br />
-                                            {data ? data.coteAnneeRepondu : ""}
-
-                                        </td>
-                                        <td colSpan='2px'>
-                                            Examen : <br />
+                <div className="col-sm-12">
+                    <h5 className="">IDENTITE DE L'ETUDIANT</h5>
+                    <div className="alert alert-success">
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Postnom</th>
+                                    <th>Promotion</th>
+                                    <th>Objet recours</th>
+                                    <th>Cotes marquées sur le bulletin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{data ? data.nomEtudiant : ""}</td>
+                                    <td>{data ? data.postnomEtudiant : ""}</td>
+                                    <td>{data ? data.promotion : ""}</td>
+                                    <td>{data ? data.objetRecours : ""}</td>
+                                    <td>
+                                        <td className="p-2">Année : {data ? data.coteAnnee : ""}</td>
+                                        <td className="p-2">Examen : {data ? data.coteExamen : ""}</td>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="col-sm-12 alert alert-success">
+                        <h5 className="">IDENTITE DU PROF ET DECISION</h5>
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nom complet</th>
+                                    <th>Cours</th>
+                                    <th>Status</th>
+                                    <th>Cotes réelles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{data ? postnomProf : ""}</td>
+                                    <td>
+                                        <td className="p-2">Cours : {data ? data.cours : ""}</td>
+                                        <td className="p-2">pondération : {data ? data.ponderationCours : ""}</td>
+                                    </td>
+                                    <td>
+                                        {data.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> :
+                                            data.statut === 1 ? <span className="text-danger">Rejeté <i className='fa fa-close'></i></span> :
+                                                data.statut === 2 ? <span className="text-success">Répondu <i className='fa fa-check'></i></span> : ""
+                                        }
+                                    </td>
+                                    <td>
+                                        <td className="p-2">Année : {data ? data.coteAnneeRepondu : ""}</td>
+                                        <td className="p-2">Examen :
                                             {data ? data.coteExamRepondu : ""}
-
                                         </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </Modal.Body>
             <Modal.Footer style={{ paddingRight: "30px" }}>
-                <ReactToPrint
-                    trigger={() => <button className='btn' style={styleBtn}>Imprimer <i className="fa fa-print"></i></button>
-                    }
-                    content={() => componentRef.current}
-                />
                 <button className='btn' style={styleBtn} onClick={closeModal}>Fermer <i className="fa fa-close"></i></button>
             </Modal.Footer>
         </Modal>
