@@ -31,6 +31,31 @@ function Form1() {
         };
     };
 
+    useEffect(() => {
+        if (!objChoist) {
+            setUserData({ ...userData, "coteExamen": 0, "coteAnnee": 0 })
+        }
+    }, []);
+
+    const handleCoteExam = (e) => {
+        if (e.target.value !== "") {
+            setUserData({ ...userData, "coteExamen": parseInt(e.target.value) });
+            setObjChoisit(false)
+        } else {
+            setObjChoisit(true)
+        }
+    };
+
+    const handleAnne = (e) => {
+        console.log(e.target.value)
+        if (e.target.value !== "") {
+            setUserData({ ...userData, "coteAnnee": parseInt(e.target.value) });
+            setObjChoisit(false)
+        } else {
+            setObjChoisit(true)
+        }
+    };
+
     const handleObjectRecours = (e) => {
         if (e.target.value === "----Object du recours----") {
             setisValidObjRecours(false);
@@ -58,7 +83,7 @@ function Form1() {
     const stepNext = () => {
         setClick(true);
         if (isValidNom === false || isValidPromotion === false || isValidPostnom === false ||
-            isValidObjRecours === false
+            isValidObjRecours === false || objChoist
         ) {
             return false;
         } else {
@@ -205,8 +230,7 @@ function Form1() {
                                         className="mb-3 form-control"
                                         type="number"
                                         placeholder='Renseigner le cote année'
-                                        value={userData['coteAnnee']}
-                                        onChange={(e) => (setUserData({ ...userData, "coteAnnee": e.target.value }))}
+                                        onChange={handleAnne}
                                         style={{ width: '100%' }}
                                     />
                                     {
@@ -223,8 +247,7 @@ function Form1() {
                                     <input className='form-control'
                                         type="number"
                                         placeholder='Renseigner le cote examen'
-                                        value={userData['coteExamen']}
-                                        onChange={(e) => (setUserData({ ...userData, "coteExamen": e.target.value }))}
+                                        onChange={handleCoteExam}
                                         style={{ width: '100%' }}
                                     />
                                     {
