@@ -35,7 +35,7 @@ function Form1() {
         if (!objChoist) {
             setUserData({ ...userData, "coteExamen": 0, "coteAnnee": 0 })
         }
-    }, []);
+    }, [objChoist]);
 
     const handleCoteExam = (e) => {
         if (e.target.value !== "") {
@@ -105,11 +105,12 @@ function Form1() {
             setisValidObjRecours(true);
         }
 
-    }, [isValidNom, isValidPromotion, isValidPostnom, isValidObjRecours,]);
+    }, [userData.nom, userData.promotion, userData.postnom, userData.objetRecours,]);
 
     const validationStyle = { color: 'red', fontSize: '13px' };
 
     const [filiere, setFiliere] = useState([]);
+    const [checked, setChecked] = useState(false);
 
     const getFilieres = () => {
         axios.get(`http://localhost:5000/api/filieres`).then(resp => {
@@ -122,6 +123,14 @@ function Form1() {
     useEffect(() => {
         getFilieres();
     }, []);
+
+    const checkBoxFunction = (e) => {
+        if (e.target.checked === true) {
+            setChecked(true);
+        } else {
+            setChecked(false);
+        }
+    }
 
     return (
         <>
@@ -203,67 +212,73 @@ function Form1() {
                     </div>
 
                     <div className="col-6 colonne62">
-                        <label style={{ marginBottom: '10px' }}>Postnom:</label> <br />
-                        <input type="text" className='form-control' placeholder='Postnom'
-                            value={userData['postnom']}
-                            onChange={(e) => (setUserData({ ...userData, "postnom": e.target.value }), handlePostnom(e))}
-                            style={{ width: '100%' }}
-                        />
-                        {
-                            click === true && (
-                                <>
-                                    {isValidPostnom === false ? <span style={validationStyle}>Veuillez renseigner votre postnom svp !</span> : ""}
-                                </>
-                            )
-                        }
-                        <br />
+                        <form encType="multipart/form-data" action=''>
+                            <label style={{ marginBottom: '10px' }}>Postnom:</label> <br />
+                            <input type="text" className='form-control' placeholder='Postnom'
+                                value={userData['postnom']}
+                                onChange={(e) => (setUserData({ ...userData, "postnom": e.target.value }), handlePostnom(e))}
+                                style={{ width: '100%' }}
+                            />
+                            {
+                                click === true && (
+                                    <>
+                                        {isValidPostnom === false ? <span style={validationStyle}>Veuillez renseigner votre postnom svp !</span> : ""}
+                                    </>
+                                )
+                            }
+                            <br />
 
-                        <label style={{ marginBottom: '10px' }}>Cotes marquées sur le bulletin:</label> <br />
-                        <div className="col-12"
-                            style={{ border: "1px solid silver", height: 'auto', padding: '20px', marginLeft: '3px' }}
-                        >
+                            <label style={{ marginBottom: '10px' }}>Cotes marquées sur le bulletin:</label> <br />
+                            <div className="col-12"
+                                style={{ border: "1px solid silver", height: 'auto', padding: '20px', marginLeft: '3px' }}
+                            >
 
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <label style={{ marginBottom: '10px' }}>Année:</label> <br />
-                                    <input
-                                        className="mb-3 form-control"
-                                        type="number"
-                                        placeholder='Renseigner le cote année'
-                                        onChange={handleAnne}
-                                        style={{ width: '100%' }}
-                                    />
-                                    {
-                                        click === true && (
-                                            <>
-                                                {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'année svp !</span> : ""}
-                                            </>
-                                        )
-                                    }
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <label style={{ marginBottom: '10px' }}>Année:</label> <br />
+                                        <input
+                                            className="mb-3 form-control"
+                                            type="number"
+                                            placeholder='Renseigner le cote année'
+                                            onChange={handleAnne}
+                                            style={{ width: '100%' }}
+                                        />
+                                        {
+                                            click === true && (
+                                                <>
+                                                    {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'année svp !</span> : ""}
+                                                </>
+                                            )
+                                        }
+                                    </div>
+
+                                    <div className="col-sm-6">
+                                        <label style={{ marginBottom: '10px' }}>Examen:</label> <br />
+                                        <input className='form-control'
+                                            type="number"
+                                            placeholder='Renseigner le cote examen'
+                                            onChange={handleCoteExam}
+                                            style={{ width: '100%' }}
+                                        />
+                                        {
+                                            click === true && (
+                                                <>
+                                                    {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'examen svp !</span> : ""}
+                                                </>
+                                            )
+                                        }
+                                    </div>
                                 </div>
+                                <input type="checkbox" onChange={checkBoxFunction} /> <label>Ajouter une preuve sous format image </label>
 
-                                <div className="col-sm-6">
-                                    <label style={{ marginBottom: '10px' }}>Examen:</label> <br />
-                                    <input className='form-control'
-                                        type="number"
-                                        placeholder='Renseigner le cote examen'
-                                        onChange={handleCoteExam}
-                                        style={{ width: '100%' }}
-                                    />
-                                    {
-                                        click === true && (
-                                            <>
-                                                {objChoist ? <span style={validationStyle}>Veuillez renseigner une cote de l'examen svp !</span> : ""}
-                                            </>
-                                        )
-                                    }
-                                </div>
-                            </div>
+                                {checked &&
+                                    <div className='row' style={{ margin: '0px' }}>
+                                        <input type='file' className='col-sm-12 form-control mt-2' onChange={(e) => setUserData({ ...userData, "file": e.target.files[0] })} style={{ width: "100%" }} />
+                                    </div>
+                                }
 
-                            <div className='row' style={{ margin: '0px' }}>
-                                <input type='file' className='col-sm-12 form-control mt-2' style={{ width: "100%" }} />
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -79,8 +79,6 @@ function Form2() {
         }
     }
 
-    console.log(userData)
-
     const nextStep = (e) => {
         e.preventDefault();
         setClick(true);
