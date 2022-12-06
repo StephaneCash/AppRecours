@@ -87,12 +87,12 @@ function DeciderRecours(props) {
                                 <td>{data ? data.nomEtudiant + ' ' + data.postnomEtudiant : ""}</td>
                                 <td>{data ? data.promotion : ""}</td>
                                 <td>{data ? data.cours : ""}</td>
+
                                 <td>
-                                    <tr>
-                                        <td style={{ border: "1px solid silver", padding: '5px' }}>Année : {data ? data.coteAnnee : ""}</td>
-                                        <td style={{ border: "1px solid silver", padding: '5px' }}>Examen : {data ? data.coteExamen : ""}</td>
-                                    </tr>
+                                    Année : {data ? data.coteAnnee : ""}<br />
+                                    Examen : {data ? data.coteExamen : ""}
                                 </td>
+
                                 <td>{data ? data.objetRecours : ""}</td>
                                 <td>
                                     {
@@ -118,7 +118,7 @@ function DeciderRecours(props) {
                                 <input type="number" className="form-control" placeholder='Cote examen' onChange={(e) => setCExamen(e.target.value)} /> <br />
                             </form>
                             {
-                                cAnnee !== "" && cExamen !== "" ?
+                                cAnnee !== "" || cExamen !== "" ?
                                     <button type="button" onClick={saveData} style={styleBtn} className='btn'>Valider</button>
                                     :
                                     <button type="button" disabled style={styleBtn} className='btn'>Valider</button>

@@ -1,6 +1,7 @@
 import { Modal } from "react-bootstrap";
 import "../css/DetailRecoursModal.css"
 import React from 'react'
+import { dateParserFunction } from "../utils/Util";
 
 
 const DetailRecours = (props) => {
@@ -21,9 +22,12 @@ const DetailRecours = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <div className="col-sm-12">
-                    <h5 className="">IDENTITE DE L'ETUDIANT</h5>
+                    <h6 className="">Créé depuis {dateParserFunction(data && data.createdAt)}
+                        <br /> Répondu depuis {dateParserFunction(data && data.updatedAt)}
+                    </h6>
+                    <hr />
                     <div className="alert alert-success">
-                        <table className="table table-bordered">
+                        <table className="table table-bordeless">
                             <thead>
                                 <tr>
                                     <th>Nom</th>
@@ -40,15 +44,15 @@ const DetailRecours = (props) => {
                                     <td>{data ? data.promotion : ""}</td>
                                     <td>{data ? data.objetRecours : ""}</td>
                                     <td>
-                                        <td className="p-2">Année : {data ? data.coteAnnee : ""}</td>
-                                        <td className="p-2">Examen : {data ? data.coteExamen : ""}</td>
+                                        Année : {data ? data.coteAnnee : ""}<br />
+                                        Examen : {data ? data.coteExamen : ""}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div className="col-sm-12 alert alert-success">
-                        <h5 className="">IDENTITE DU PROF ET DECISION</h5>
+                        <h6 className="">Décision du professeur</h6>
                         <table className="table table-bordered">
                             <thead>
                                 <tr>
@@ -61,10 +65,11 @@ const DetailRecours = (props) => {
                             <tbody>
                                 <tr>
                                     <td>{data ? postnomProf : ""}</td>
-                                    <td>
-                                        <td className="p-2">Cours : {data ? data.cours : ""}</td>
-                                        <td className="p-2">pondération : {data ? data.ponderationCours : ""}</td>
-                                    </td>
+
+                                    <td className="p-2">
+                                        Pondération : {data ? data.ponderationCours : ""} <br />
+                                        Cours : {data ? data.cours : ""}</td>
+
                                     <td>
                                         {data.statut === 0 ? <><i className='fa fa-spinner fa-spin'></i> En attente...</> :
                                             data.statut === 1 ? <span className="text-danger">Rejeté <i className='fa fa-close'></i></span> :
@@ -72,10 +77,8 @@ const DetailRecours = (props) => {
                                         }
                                     </td>
                                     <td>
-                                        <td className="p-2">Année : {data ? data.coteAnneeRepondu : ""}</td>
-                                        <td className="p-2">Examen :
-                                            {data ? data.coteExamRepondu : ""}
-                                        </td>
+                                        Année : {data ? data.coteAnneeRepondu : ""}<br />
+                                        Examen : {data ? data.coteExamRepondu : ""}
                                     </td>
                                 </tr>
                             </tbody>

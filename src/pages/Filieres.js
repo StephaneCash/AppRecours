@@ -89,7 +89,7 @@ function Filieres() {
                                                     dataFilieres.taille >= 1 ?
                                                         dataFilieres.data.map((val, index) => {
                                                             return (
-                                                                <tr>
+                                                                <tr key={val.id}>
                                                                     <td>{index + 1}</td>
                                                                     <td>{val.nom}</td>
                                                                     <td>{val.niveau}</td>
